@@ -131,6 +131,7 @@ def draw_bars(ax, pct: pd.DataFrame, deltas: dict = None) -> None:
 
     ax.set_yticks(list(y_base))
     ax.set_yticklabels(APP_ORDER, fontsize=11, fontweight="bold")
+    ax.invert_yaxis()  # keep the reading order (chatgpt, gemini, claude) top to bottom
     ax.set_xlabel("Share of reviews (%)", fontsize=10.5)
     ax.set_xlim(0, 100)
     ax.grid(axis="x", linestyle="--", alpha=0.35)
