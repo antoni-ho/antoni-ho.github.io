@@ -131,8 +131,7 @@
 
         <p class="section-lead">
           Every project here follows the same loop: scrape the data, clean it, quantify
-          it, then visualise what matters. This one runs from a Play Store scraper, through
-          text cleaning and VADER sentiment scoring, to the charts and word clouds below.
+          it, then visualise what matters.
         </p>
 
         <article class="case">
@@ -148,6 +147,14 @@
               higher</em>, but <em>what each user base is actually complaining about</em>
               &mdash; and whether the rating gap survives once the text is read.
             </p>
+
+            <p class="case-why">
+              <strong>Why sentiment analysis?</strong> A star rating tells you how many
+              people are unhappy, but not why. Reading the reviews turns thousands of
+              free-text opinions into comparable numbers, so each app&rsquo;s complaints can
+              be counted, ranked and explained.
+            </p>
+
             <ul class="chips case-tags" aria-label="Tools and techniques">
               <li class="chip">Python</li>
               <li class="chip">pandas</li>
@@ -194,8 +201,8 @@
               <span class="case-stat-label">Claude negative</span>
             </li>
             <li>
-              <span class="case-stat-value">73.5%</span>
-              <span class="case-stat-label">Lexicon&ndash;rating agreement</span>
+              <span class="case-stat-value">4&times;</span>
+              <span class="case-stat-label">More negative reviews than ChatGPT</span>
             </li>
           </ul>
 
@@ -206,7 +213,7 @@
               <p>
                 79.1% of reviews are positive and only 3.7% negative &mdash; four times
                 fewer than Claude. Praise is emotional rather than functional, and the
-                rare complaints target wrong answers and image generation.
+                rare complaints target wrong answers, slow responses and image generation.
               </p>
             </div>
 
@@ -215,8 +222,8 @@
               <h4 class="finding-title">Polarised by access, not quality</h4>
               <p>
                 Claude carries the largest negative share (14.8%). Its reviews are
-                dominated by <em>limit</em>, <em>subscription</em>, <em>usage</em> and
-                <em>banned</em>: users dispute the paywall and account controls, not the
+                dominated by <em>account</em>, <em>limit</em>, <em>verification</em> and
+                <em>paid</em>: users dispute the paywall and account controls, not the
                 answers themselves.
               </p>
             </div>
@@ -250,8 +257,9 @@
               alt="Side-by-side charts comparing sentiment shares before and after removing reviews shorter than three words."
               width="1600" height="708" loading="lazy" decoding="async" />
             <figcaption>
-              Robustness check: dropping short reviews inflates negative shares by up
-              to 7.9 percentage points, so the filter was rejected for the main analysis.
+              One-line reviews such as &ldquo;good&rdquo; or &ldquo;nice&rdquo; were tested
+              for removal because they add little detail. Dropping them pushed negative
+              shares up by as much as 7.9 points, so they were kept in the main analysis.
             </figcaption>
           </figure>
 
@@ -273,6 +281,7 @@
 
           <div class="case-clouds">
             <figure class="case-figure">
+              <span class="finding-tag finding-tag--pos">ChatGPT</span>
               <img
                 src="images/web/wordcloud_negative_chatgpt.webp"
                 alt="Word cloud of negative ChatGPT reviews in which the words time and image are the largest, followed by wrong and hate."
@@ -285,6 +294,7 @@
             </figure>
 
             <figure class="case-figure">
+              <span class="finding-tag finding-tag--neu">Gemini</span>
               <img
                 src="images/web/wordcloud_negative_gemini.webp"
                 alt="Word cloud of negative Gemini reviews in which the word bad is by far the largest, followed by assistant, useless and waste."
@@ -297,6 +307,7 @@
             </figure>
 
             <figure class="case-figure">
+              <span class="finding-tag finding-tag--neg">Claude</span>
               <img
                 src="images/web/wordcloud_negative_claude.webp"
                 alt="Word cloud of negative Claude reviews in which account and limit are the largest, followed by verification and paid."

@@ -532,6 +532,24 @@ strong {
   font-style: normal;
 }
 
+/* --- Plain-language note: why this analysis exists --- */
+.case-why {
+  margin-top: 16px;
+  padding: 14px 18px;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.03);
+  border-left: 2px solid var(--accent-line);
+  border-radius: 0 10px 10px 0;
+  text-wrap: pretty;
+}
+
+.case-why strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
 .case-tags { margin-top: 20px; }
 
 /* --- Meta row: collection date + source link --- */
