@@ -145,7 +145,7 @@
               assistants, cleaned them into an analysis-ready dataset, and scored every
               review with VADER. The question was not simply <em>which app is rated
               higher</em>, but <em>what each user base is actually complaining about</em>
-              &mdash; and whether the rating gap survives once the text is read.
+              &mdash; and whether the star ratings agree with what people actually wrote.
             </p>
 
             <p class="case-why">
@@ -202,7 +202,7 @@
             </li>
             <li>
               <span class="case-stat-value">4&times;</span>
-              <span class="case-stat-label">More negative reviews than ChatGPT</span>
+              <span class="case-stat-label">Higher negative rate than ChatGPT</span>
             </li>
           </ul>
 
@@ -213,7 +213,8 @@
               <p>
                 79.1% of reviews are positive and only 3.7% negative &mdash; four times
                 fewer than Claude. Praise is emotional rather than functional, and the
-                rare complaints target wrong answers, slow responses and image generation.
+                rare complaints target <em>wrong answers</em>, <em>slow responses</em> and
+                <em>image generation</em>.
               </p>
             </div>
 
@@ -257,9 +258,10 @@
               alt="Side-by-side charts comparing sentiment shares before and after removing reviews shorter than three words."
               width="1600" height="708" loading="lazy" decoding="async" />
             <figcaption>
-              One-line reviews such as &ldquo;good&rdquo; or &ldquo;nice&rdquo; were tested
-              for removal because they add little detail. Dropping them pushed negative
-              shares up by as much as 7.9 points, so they were kept in the main analysis.
+              <strong>Why this check?</strong> Removing one-line reviews such as
+              &ldquo;good&rdquo; or &ldquo;nice&rdquo; was considered because they add
+              little detail. Doing so pushed negative shares up by as much as 7.9 points,
+              so the full dataset was kept.
             </figcaption>
           </figure>
 
