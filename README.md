@@ -1,8 +1,8 @@
 # ChatGPT vs Gemini vs Claude — Google Play Review Sentiment Analysis
 
 A small end-to-end data analyst project: scrape 9,000 Google Play reviews of the three
-most popular AI assistants, clean the text, score every review with VADER, and compare
-what each user base is actually complaining about.
+most popular AI assistants, clean the text down to 8,480 analysable reviews, score every
+one with VADER, and compare what each user base is actually complaining about.
 
 **Result in one line:** ChatGPT users are mostly happy, Gemini users are mostly indifferent,
 and Claude users are the most negative — because of access and billing, not answer quality.
@@ -154,13 +154,13 @@ still contain a complaint.
 The answers above say *what happened*; this section says *what a product team could do
 about it*. These are recommendations, not measured outcomes.
 
+- **ChatGPT** — people already trust the answers. The few complaints are about waiting,
+  and about pictures that fail to generate.
+- **Gemini** — people are not angry, they are not convinced the app is useful. Showing
+  what it can do matters more than polishing the answers.
 - **Claude** — people are not saying the answers are bad; they are saying they cannot get
   in or use it enough. Fixing limits, checks and billing would help more than a smarter
   model.
-- **Gemini** — people are not angry, they are not convinced the app is useful. Showing
-  what it can do matters more than polishing the answers.
-- **ChatGPT** — people already trust the answers. The few complaints are about waiting,
-  and about pictures that fail to generate.
 
 ## Limitations
 
