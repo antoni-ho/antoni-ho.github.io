@@ -128,8 +128,187 @@
     <section class="section section--projects" id="projects" aria-labelledby="projects-title">
       <div class="container">
         <h2 class="section-title" id="projects-title">Projects</h2>
-        <!-- Case studies will be added here. -->
-        <div class="projects-grid" id="projects-grid"></div>
+
+        <p class="section-lead">
+          Every project here follows the same loop: scrape the data, clean it, quantify
+          it, then visualise what matters. This one runs from a Play Store scraper, through
+          text cleaning and VADER sentiment scoring, to the charts and word clouds below.
+        </p>
+
+        <article class="case">
+          <header class="case-head">
+            <p class="case-kicker">Sentiment Analysis &middot; Google Play Store</p>
+            <h3 class="case-title">
+              ChatGPT vs Gemini vs Claude: what 8,480 reviews really say
+            </h3>
+            <p class="case-summary">
+              I collected the most recent English reviews of the three leading AI
+              assistants, cleaned them into an analysis-ready dataset, and scored every
+              review with VADER. The question was not simply <em>which app is rated
+              higher</em>, but <em>what each user base is actually complaining about</em>
+              &mdash; and whether the rating gap survives once the text is read.
+            </p>
+            <ul class="chips case-tags" aria-label="Tools and techniques">
+              <li class="chip">Python</li>
+              <li class="chip">pandas</li>
+              <li class="chip">google-play-scraper</li>
+              <li class="chip">VADER</li>
+              <li class="chip">matplotlib</li>
+            </ul>
+
+            <div class="case-meta">
+              <p class="case-date">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+                     aria-hidden="true" focusable="false">
+                  <rect x="3" y="5" width="18" height="16" rx="2.5"/>
+                  <path d="M8 3v4M16 3v4M3 10h18"/>
+                </svg>
+                <span>Data collected on October 28, 2026.</span>
+              </p>
+
+              <a class="case-source"
+                 href="https://github.com/antoni-ho/antoni-ho.github.io"
+                 target="_blank" rel="noopener noreferrer">
+                <span>View source code on GitHub</span>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+                     aria-hidden="true" focusable="false">
+                  <path d="M5 12h14M13 6l6 6-6 6"/>
+                </svg>
+              </a>
+            </div>
+          </header>
+
+          <ul class="case-stats">
+            <li>
+              <span class="case-stat-value">8,480</span>
+              <span class="case-stat-label">Reviews analysed</span>
+            </li>
+            <li>
+              <span class="case-stat-value">79.1%</span>
+              <span class="case-stat-label">ChatGPT positive</span>
+            </li>
+            <li>
+              <span class="case-stat-value">14.8%</span>
+              <span class="case-stat-label">Claude negative</span>
+            </li>
+            <li>
+              <span class="case-stat-value">73.5%</span>
+              <span class="case-stat-label">Lexicon&ndash;rating agreement</span>
+            </li>
+          </ul>
+
+          <div class="case-findings">
+            <div class="finding">
+              <span class="finding-tag finding-tag--pos">ChatGPT</span>
+              <h4 class="finding-title">Highest satisfaction, fewest complaints</h4>
+              <p>
+                79.1% of reviews are positive and only 3.7% negative &mdash; four times
+                fewer than Claude. Praise is emotional rather than functional, and the
+                rare complaints target wrong answers and image generation.
+              </p>
+            </div>
+
+            <div class="finding">
+              <span class="finding-tag finding-tag--neg">Claude</span>
+              <h4 class="finding-title">Polarised by access, not quality</h4>
+              <p>
+                Claude carries the largest negative share (14.8%). Its reviews are
+                dominated by <em>limit</em>, <em>subscription</em>, <em>usage</em> and
+                <em>banned</em>: users dispute the paywall and account controls, not the
+                answers themselves.
+              </p>
+            </div>
+
+            <div class="finding">
+              <span class="finding-tag finding-tag--neu">Gemini</span>
+              <h4 class="finding-title">Indifferent more than unhappy</h4>
+              <p>
+                Gemini holds the highest neutral share (22.1%) and the weakest positive
+                consensus (70.9%). Its negative reviews lean on <em>useless</em> and
+                <em>waste</em> &mdash; a product that leaves many users without a strong
+                opinion either way.
+              </p>
+            </div>
+          </div>
+
+          <figure class="case-figure">
+            <img
+              src="images/web/sentiment_distribution.webp"
+              alt="Horizontal bar chart comparing positive, neutral and negative review shares for ChatGPT, Gemini and Claude."
+              width="1600" height="893" loading="lazy" decoding="async" />
+            <figcaption>
+              Sentiment mix per application, scored with VADER across 8,480 reviews.
+              ChatGPT leads on positive share; Claude carries the heaviest negative tail.
+            </figcaption>
+          </figure>
+
+          <figure class="case-figure case-figure--stacked">
+            <img
+              src="images/web/sentiment_distribution_sensitivity.webp"
+              alt="Side-by-side charts comparing sentiment shares before and after removing reviews shorter than three words."
+              width="1600" height="708" loading="lazy" decoding="async" />
+            <figcaption>
+              Robustness check: dropping short reviews inflates negative shares by up
+              to 7.9 percentage points, so the filter was rejected for the main analysis.
+            </figcaption>
+          </figure>
+
+          <aside class="case-method" aria-label="Methodology validation">
+            <div class="case-method-body">
+              <p class="case-method-label">Methodology validation</p>
+              <p>
+                Scoring the same reviews twice &mdash; once with raw text and once with
+                the cleaned text &mdash; moved agreement with the star rating by only
+                0.3 percentage points. The cleaning pipeline removes punctuation, emoji
+                and numbers without destroying the sentiment signal.
+              </p>
+            </div>
+            <ul class="case-method-stats">
+              <li><strong>73.5%</strong><span>raw text</span></li>
+              <li><strong>73.2%</strong><span>cleaned text</span></li>
+            </ul>
+          </aside>
+
+          <div class="case-clouds">
+            <figure class="case-figure">
+              <img
+                src="images/web/wordcloud_negative_chatgpt.webp"
+                alt="Word cloud of negative ChatGPT reviews in which the words time and image are the largest, followed by wrong and hate."
+                width="1444" height="821" loading="lazy" decoding="async" />
+              <figcaption>
+                Based on 104 negative reviews &mdash; <em>time</em> and <em>image</em> are
+                the largest words (long waits, failed image generation), followed by
+                <em>wrong</em> (answers that miss the mark).
+              </figcaption>
+            </figure>
+
+            <figure class="case-figure">
+              <img
+                src="images/web/wordcloud_negative_gemini.webp"
+                alt="Word cloud of negative Gemini reviews in which the word bad is by far the largest, followed by assistant, useless and waste."
+                width="1444" height="821" loading="lazy" decoding="async" />
+              <figcaption>
+                Based on 197 negative reviews &mdash; <em>bad</em> is the single largest
+                word, with <em>useless</em> and <em>waste</em> close behind (the assistant
+                judged not worth using).
+              </figcaption>
+            </figure>
+
+            <figure class="case-figure">
+              <img
+                src="images/web/wordcloud_negative_claude.webp"
+                alt="Word cloud of negative Claude reviews in which account and limit are the largest, followed by verification and paid."
+                width="1444" height="821" loading="lazy" decoding="async" />
+              <figcaption>
+                Based on 428 negative reviews &mdash; <em>account</em> and <em>limit</em>
+                dominate, joined by <em>verification</em> and <em>paid</em> (logins,
+                message caps and billing).
+              </figcaption>
+            </figure>
+          </div>
+        </article>
       </div>
     </section>
 

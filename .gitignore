@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Local tooling
+.chrome-tmp/
+_shots/
+_preview*.html
+
+# Working notes (not part of the published site)
+TODO_END_OF_PROJECT.md
