@@ -136,17 +136,20 @@ still contain a complaint.
   waiting time.
 - **Gemini** has the most neutral reviews — users are indifferent rather than angry.
 - **Claude** has four times ChatGPT's negative rate, and about two in five of those
-  negative reviews mention an account, limit or billing problem (39.7%, versus 9.6% for
+  negative reviews mention an account, limit or billing problem (38.1%, versus 8.6% for
   Gemini).
 
 ## Business implications
 
-- **Claude** — access, not intelligence, decides retention. Limits, verification and
-  billing are the lever to fix first.
-- **Gemini** — indifference is the risk. Users are unconvinced rather than angry, so
-  demonstrating usefulness matters more than polishing answers.
-- **ChatGPT** — the bar is reliability. The few complaints cluster on image generation and
-  speed, not on the core chat experience.
+These are recommendations built on the findings above, not measured outcomes.
+
+- **Claude** — people are not saying the answers are bad; they are saying they cannot get
+  in or use it enough. Fixing limits, checks and billing would help more than a smarter
+  model.
+- **Gemini** — people are not angry, they are not convinced the app is useful. Showing
+  what it can do matters more than polishing the answers.
+- **ChatGPT** — people already trust the answers. The few complaints are about waiting,
+  and about pictures that fail to generate.
 
 ## Limitations
 
@@ -155,8 +158,9 @@ still contain a complaint.
 - Reviewers on Google Play are not a representative sample of all app users.
 - VADER is lexicon-based and misses sarcasm, negation and context.
 - Star ratings are a proxy for sentiment, not a labelled ground truth.
-- The "access complaint" share is measured with a hand-built keyword list, so treat it as
-  directional evidence rather than a precise rate.
+- The "access complaint" share is measured with a hand-built keyword list (account, limit,
+  limited, subscription, verification, paid, payment, banned, usage, login, refund, price),
+  so treat it as directional evidence rather than a precise rate.
 
 ---
 
