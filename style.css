@@ -812,22 +812,54 @@ strong {
 }
 
 /* --- Closing note: scope and takeaway --- */
-.case-note {
+.case-close {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
   margin-top: 30px;
-  padding: 22px 24px;
+  padding: 24px;
   background: rgba(255, 255, 255, 0.022);
   border: 1px solid var(--line);
   border-radius: 14px;
 }
 
-.case-note p {
+.case-close-block p {
   font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--muted);
   text-wrap: pretty;
 }
 
-.case-note p + p { margin-top: 10px; }
+.case-impacts {
+  display: grid;
+  gap: 10px;
+}
+
+.case-impacts li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.case-impacts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-line);
+}
+
+.case-impacts strong {
+  color: var(--text);
+  font-weight: 600;
+}
 
 /* --------------------------------------------------------------------------
    10. Responsive
@@ -854,6 +886,8 @@ strong {
   .case-clouds { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   .case-praise { grid-template-columns: 1fr; gap: 20px; }
+
+  .case-close { grid-template-columns: 1fr; gap: 22px; padding: 20px; }
 }
 
 @media (max-width: 680px) {
