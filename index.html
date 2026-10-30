@@ -202,7 +202,7 @@
             </li>
             <li>
               <span class="case-stat-value">4&times;</span>
-              <span class="case-stat-label">Higher negative rate than ChatGPT</span>
+              <span class="case-stat-label">Claude vs ChatGPT: more likely to be negative</span>
             </li>
           </ul>
 
@@ -258,10 +258,11 @@
               alt="Side-by-side charts comparing sentiment shares before and after removing reviews shorter than three words."
               width="1600" height="708" loading="lazy" decoding="async" />
             <figcaption>
-              <strong>Why this check?</strong> Removing one-line reviews such as
-              &ldquo;good&rdquo; or &ldquo;nice&rdquo; was considered because they add
-              little detail. Doing so pushed negative shares up by as much as 7.9 points,
-              so the full dataset was kept.
+              <strong>Why this check?</strong> Very short reviews (&ldquo;good&rdquo;,
+              &ldquo;nice&rdquo;) are usually treated as low-information noise, so removing
+              them was worth testing. The test said no: dropping them lifted every
+              app&rsquo;s negative share, and Gemini almost doubled, from 7.1% to 14.9%.
+              The full dataset was kept.
             </figcaption>
           </figure>
 
@@ -290,8 +291,9 @@
                 width="1444" height="821" loading="lazy" decoding="async" />
               <figcaption>
                 Based on 104 negative reviews &mdash; <em>time</em> and <em>image</em> are
-                the largest words (long waits, failed image generation), followed by
-                <em>wrong</em> (answers that miss the mark).
+                the largest (long waits, failed image generation); <em>wrong</em>,
+                <em>problem</em> and <em>hate</em> follow almost tied (answers that miss
+                the mark).
               </figcaption>
             </figure>
 
@@ -302,9 +304,9 @@
                 alt="Word cloud of negative Gemini reviews in which the word bad is by far the largest, followed by assistant, useless and waste."
                 width="1444" height="821" loading="lazy" decoding="async" />
               <figcaption>
-                Based on 197 negative reviews &mdash; <em>bad</em> is the single largest
-                word, with <em>useless</em> and <em>waste</em> close behind (the assistant
-                judged not worth using).
+                Based on 197 negative reviews &mdash; <em>bad</em> is by far the largest,
+                then <em>assistant</em>, <em>useless</em> and <em>waste</em>: users
+                describe the app as a useless assistant that wastes their time.
               </figcaption>
             </figure>
 
@@ -315,9 +317,32 @@
                 alt="Word cloud of negative Claude reviews in which account and limit are the largest, followed by verification and paid."
                 width="1444" height="821" loading="lazy" decoding="async" />
               <figcaption>
-                Based on 428 negative reviews &mdash; <em>account</em> and <em>limit</em>
-                dominate, joined by <em>verification</em> and <em>paid</em> (logins,
-                message caps and billing).
+                Based on 428 negative reviews &mdash; <em>account</em> is the largest word,
+                followed by <em>time</em>, <em>limit</em> and <em>bad</em>;
+                <em>verification</em> and <em>paid</em> rank just below (logins, message
+                caps and billing).
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="case-praise">
+            <div class="case-praise-body">
+              <p class="case-method-label">What users praise</p>
+              <p>
+                The positive side looks almost identical across the three apps. The words
+                are everyday praise &mdash; <em>best</em>, <em>nice</em>, <em>great</em>,
+                <em>love</em> &mdash; the same vocabulary people use for any app that
+                simply works, not for something that feels revolutionary.
+              </p>
+            </div>
+
+            <figure class="case-figure">
+              <img
+                src="images/web/wordcloud_positive.webp"
+                alt="Word cloud of positive reviews for all three apps, dominated by the words best, nice, great and love."
+                width="1444" height="821" loading="lazy" decoding="async" />
+              <figcaption>
+                Based on 6,250 positive reviews across ChatGPT, Gemini and Claude.
               </figcaption>
             </figure>
           </div>
