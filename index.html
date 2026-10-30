@@ -262,7 +262,7 @@
               &ldquo;nice&rdquo;) are usually treated as low-information noise, so removing
               them was worth testing. The test said no: dropping them lifted every
               app&rsquo;s negative share, and Gemini almost doubled, from 7.1% to 14.9%.
-              The full dataset was kept.
+              So the full dataset was kept for the analysis.
             </figcaption>
           </figure>
 
@@ -270,10 +270,16 @@
             <div class="case-method-body">
               <p class="case-method-label">Methodology validation</p>
               <p>
-                Scoring the same reviews twice &mdash; once with raw text and once with
-                the cleaned text &mdash; moved agreement with the star rating by only
-                0.3 percentage points. The cleaning pipeline removes punctuation, emoji
-                and numbers without destroying the sentiment signal.
+                Every number and word cloud on this page comes from the
+                <strong>cleaned text</strong>. Cleaning strips punctuation, numbers and
+                emoji because they split one word into several tokens
+                (&ldquo;good!!!&rdquo;, &ldquo;good&rdquo;, &ldquo;good&#128077;&rdquo;)
+                and add characters a word count cannot read.
+              </p>
+              <p>
+                To check this did not change the story, the same reviews were scored
+                twice: raw text agrees with the star rating 73.5% of the time, cleaned
+                text 73.2% &mdash; a 0.3-point gap.
               </p>
             </div>
             <ul class="case-method-stats">
@@ -291,9 +297,9 @@
                 width="1444" height="821" loading="lazy" decoding="async" />
               <figcaption>
                 Based on 104 negative reviews &mdash; <em>time</em> and <em>image</em> are
-                the largest (long waits, failed image generation); <em>wrong</em>,
-                <em>problem</em> and <em>hate</em> follow almost tied (answers that miss
-                the mark).
+                the largest, so the complaints are about waiting too long and failed image
+                generation. <em>wrong</em>, <em>problem</em> and <em>hate</em> follow
+                almost tied, all describing answers that miss the mark.
               </figcaption>
             </figure>
 
@@ -318,9 +324,9 @@
                 width="1444" height="821" loading="lazy" decoding="async" />
               <figcaption>
                 Based on 428 negative reviews &mdash; <em>account</em> is the largest word,
-                followed by <em>time</em>, <em>limit</em> and <em>bad</em>;
-                <em>verification</em> and <em>paid</em> rank just below (logins, message
-                caps and billing).
+                followed by <em>time</em>, <em>limit</em> and <em>bad</em>.
+                <em>verification</em> and <em>paid</em> rank just below, and both point to
+                the same friction: logging in, hitting message caps and paying.
               </figcaption>
             </figure>
           </div>
