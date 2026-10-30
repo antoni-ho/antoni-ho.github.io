@@ -17,7 +17,7 @@ Star ratings tell you *how many* users are unhappy, not *why*. This project asks
 
 1. How does sentiment differ between ChatGPT, Gemini and Claude?
 2. What is each app's complaint actually about?
-3. Do the star ratings agree with what people wrote?
+3. Do the star ratings tell the same story as the reviews, or do they hide complaints?
 
 **Short answers**
 
@@ -25,8 +25,8 @@ Star ratings tell you *how many* users are unhappy, not *why*. This project asks
    (14.8%), four times ChatGPT's.
 2. Complaints differ in kind, not just in volume: access and billing for Claude,
    usefulness for Gemini, output quality for ChatGPT.
-3. Largely yes (73.2% agreement), so the star gap reflects what users wrote rather than
-   noise.
+3. Mostly they agree (73.2%), but not always — a five-star review can still contain a
+   complaint, which is exactly why the text is worth reading.
 
 ## Dataset
 
@@ -151,7 +151,8 @@ still contain a complaint.
 
 ## Business implications
 
-These are recommendations built on the findings above, not measured outcomes.
+The answers above say *what happened*; this section says *what a product team could do
+about it*. These are recommendations, not measured outcomes.
 
 - **Claude** — people are not saying the answers are bad; they are saying they cannot get
   in or use it enough. Fixing limits, checks and billing would help more than a smarter
