@@ -19,6 +19,15 @@ Star ratings tell you *how many* users are unhappy, not *why*. This project asks
 2. What is each app's complaint actually about?
 3. Do the star ratings agree with what people wrote?
 
+**Short answers**
+
+1. ChatGPT leads on positive sentiment (79.1%); Claude has the highest negative share
+   (14.8%), four times ChatGPT's.
+2. Complaints differ in kind, not just in volume: access and billing for Claude,
+   usefulness for Gemini, output quality for ChatGPT.
+3. Largely yes (73.2% agreement), so the star gap reflects what users wrote rather than
+   noise.
+
 ## Dataset
 
 | Item | Value |
@@ -28,6 +37,7 @@ Star ratings tell you *how many* users are unhappy, not *why*. This project asks
 | Reviews scraped | 9,000 (3,000 newest per app) |
 | Filter | English (`lang=en`), region `us`, sorted by newest |
 | Collected on | 28 October 2026 |
+| Review window | ≈ 1 day for ChatGPT, ≈ 2 days for Gemini, ≈ 20 days for Claude |
 | Analysis set | 8,480 reviews after cleaning and noise filtering |
 
 ## Tools
@@ -153,8 +163,9 @@ These are recommendations built on the findings above, not measured outcomes.
 
 ## Limitations
 
-- English-language reviews only, from a single collection date — this is a snapshot, not a
-  trend.
+- Only the 3,000 newest English reviews per app were collected, on 28 October 2026.
+  Because review volume differs, that window covers roughly one day for ChatGPT but
+  about three weeks for Claude, so the three samples are not equally time-balanced.
 - Reviewers on Google Play are not a representative sample of all app users.
 - VADER is lexicon-based and misses sarcasm, negation and context.
 - Star ratings are a proxy for sentiment, not a labelled ground truth.
