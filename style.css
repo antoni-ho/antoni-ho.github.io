@@ -980,3 +980,86 @@ strong {
 
   .accent { color: #000; }
 }
+
+/* --------------------------------------------------------------------------
+   12. Project index cards (landing page)
+   -------------------------------------------------------------------------- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 10px;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px 26px 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease),
+              background-color 0.35s var(--ease);
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--line-strong);
+  background: var(--surface-2);
+}
+
+.project-card-title {
+  font-size: 1.28rem;
+  line-height: 1.32;
+  letter-spacing: -0.01em;
+}
+
+.project-card-summary {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.project-card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  margin: 0;
+  padding: 16px 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.project-card-stats li { display: grid; gap: 2px; }
+
+.project-card-stats strong {
+  font-size: 1.12rem;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.project-card-stats span {
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+}
+
+.project-card-link {
+  margin-top: auto;
+  align-self: flex-start;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s var(--ease);
+}
+
+.project-card-link:hover { border-bottom-color: var(--accent-line); }
+
+@media (max-width: 760px) {
+  .project-grid { grid-template-columns: 1fr; gap: 16px; }
+  .project-card { padding: 22px 20px 18px; }
+}

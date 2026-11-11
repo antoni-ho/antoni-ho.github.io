@@ -1,0 +1,39 @@
+EDA
+==================================================================
+rows loaded: 10,484
+
+model series fitted: 64
+series whose price rises with age (noise): 1 (1.6%)
+
+-- annual retention by brand --
+   saved images\01_brand_retention.png
+   Suzuki            95.6%   IQR 94.9-96.1   series=5
+   Daihatsu          95.1%   IQR 94.2-95.3   series=5
+   Toyota            94.4%   IQR 90.2-95.4   series=15
+   Mitsubishi        94.1%   IQR 93.7-94.2   series=3
+   Honda             93.1%   IQR 90.2-93.9   series=7
+   Mazda             91.8%   IQR 90.8-94.7   series=5
+   Mercedes-Benz     87.9%   IQR 86.8-88.3   series=5
+   Hyundai           87.5%   IQR 87.1-87.9   series=5
+   BMW               87.0%   IQR 84.8-88.8   series=6
+   spread: Suzuki loses 4.4%/yr, BMW loses 13.0%/yr
+
+   saved images\02_retention_curves.png
+
+transmission cells (>=5 each side) : 24
+   raw automatic premium            : +125.3%
+   like-for-like premium (median)   : +5.8%
+   age 0–2:  6 cells, median +11.6%
+   age 3–5: 17 cells, median +4.8%
+   age 6–9:  1 cells, median +1.6%
+   saved images\03_transmission_premium.png
+
+   saved images\04_mileage_illusion.png
+mileage: raw gap lowest->highest quintile : -74.5%
+mileage: within model-year contrast        : -4.1% median, -4.1% mean (504 model-years)
+   median odometer, low vs high third      : 22,500 vs 62,500 km
+   share of model-years with a negative gap: 68.1%
+
+   saved images\05_market_structure.png
+body types: {'SUV': 4819, 'MPV': 2633, 'Hatchback': 1140, 'Sedan': 1009}
+origins   : {'Japan': 6013, 'Europe': 2095, 'China': 1117, 'Korea': 771, 'USA': 289, 'Other': 199}

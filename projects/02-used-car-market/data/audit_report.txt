@@ -1,0 +1,123 @@
+DATA QUALITY AUDIT
+==============================================================
+rows read: 12,000
+
+-- field completeness --
+   brand            12,000  100.0%
+   model            12,000  100.0%
+   variant          10,991   91.6%
+   year             12,000  100.0%
+   price            12,000  100.0%
+   mileage_km        9,883   82.4%
+   transmission     12,000  100.0%
+   body_type        11,996  100.0%
+   fuel_type        12,000  100.0%
+   engine_cc        10,840   90.3%
+   province         12,000  100.0%
+   city             11,994  100.0%
+   profile_type     12,000  100.0%
+   description      11,994  100.0%
+   seller_badges    12,000  100.0%
+
+-- brands (58) --
+   Toyota              2,013   16.8%
+   Honda               1,173    9.8%
+   Mercedes-Benz         790    6.6%
+   Mitsubishi            783    6.5%
+   BMW                   690    5.8%
+   Daihatsu              683    5.7%
+   Hyundai               682    5.7%
+   Suzuki                645    5.4%
+   Mazda                 543    4.5%
+   Nissan                406    3.4%
+   Lexus                 389    3.2%
+   BYD                   359    3.0%
+   Chery                 303    2.5%
+   Wuling                241    2.0%
+   Porsche               168    1.4%
+   KIA                   168    1.4%
+   Land Rover            164    1.4%
+   MINI                  159    1.3%
+   (+40 more brands)
+
+-- vehicle model year --
+   2026  1,712  ############################################################
+   2025  1,217  ###########################################
+   2024  1,322  ##############################################
+   2023  1,478  ####################################################
+   2022  1,282  #############################################
+   2021    960  ##################################
+   2020    408  ##############
+   2019    764  ###########################
+   2018    596  #####################
+   2017    513  ##################
+   2016    346  ############
+   2015    311  ###########
+   2014    278  ##########
+   2013    291  ##########
+   2012    206  #######
+   2011    112  ####
+   2010     67  ##
+   2009     22  #
+   2008     27  #
+   2007     18  #
+   2006     15  #
+   2005      7  #
+   2004      6  #
+   2003      8  #
+   2002      5  #
+   2001      2  #
+   2000      5  #
+   1999      1  #
+   1998      1  #
+   1997      3  #
+   1996      3  #
+   1994      1  #
+   1993      1  #
+   1992      1  #
+   1991      2  #
+   1990      6  #
+   1983      2  #
+   1982      1  #
+
+-- cells (brand, model, year) --
+   cells                : 1,996
+   median cell size     : 3
+   quartiles 1 / 3      : 1 / 7
+   cells >=  5 obs     :   753 cells (37.7%)  cover 80.7% of rows
+   cells >= 10 obs     :   360 cells (18.0%)  cover 58.7% of rows
+   cells >= 20 obs     :   121 cells ( 6.1%)  cover 31.9% of rows
+   cells >= 30 obs     :    52 cells ( 2.6%)  cover 18.4% of rows
+   cells >= 50 obs     :    10 cells ( 0.5%)  cover  5.6% of rows
+
+-- statistical precision (log price) --
+   within-cell sigma    : 0.121 (about +/-13% between comparable cars)
+   median cell (n=3)   : 95% CI of median = +/-18.7%
+   with n x 5 (n=15)   : 95% CI of median = +/-8.0%
+   -> a 5x larger sample narrows the interval by roughly 55%,
+      at 5x the crawl time and bandwidth.
+
+-- duplicates (brand, model, year, price, km, city identical) --
+   duplicate groups     : 1,026
+   excess rows          : 1,471  (12.3%)
+   unique sellers       : 918
+   listings per seller  : mean 13.1, max 386
+
+-- price (IDR) --
+   p  0.1          57,499,500
+   p  1.0          89,000,000
+   p  5.0         116,000,000
+   p 25.0         193,000,000
+   p 50.0         302,200,000
+   p 75.0         550,000,000
+   p 95.0       2,175,000,000
+   p 99.0       7,351,490,000
+   p 99.9      17,000,000,000
+-- mileage: p5 2,500 | median 37,500 | p95 118,900 | max 5,000,000
+
+-- transmission --
+   Automatic          11,006   91.7%
+   Manual                994    8.3%
+-- seller type --
+   Dealer             11,725   97.7%
+   Private               275    2.3%

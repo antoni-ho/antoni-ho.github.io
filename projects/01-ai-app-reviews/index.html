@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sentiment analysis of 8,480 Google Play reviews of ChatGPT, Gemini and Claude — what each user base actually complains about." />
+  <meta name="theme-color" content="#0b0a09" />
+  <meta name="author" content="Antoni" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="ChatGPT vs Gemini vs Claude — what 8,480 reviews really say" />
+  <meta property="og:description" content="What each user base is actually complaining about, and whether star ratings agree with the text." />
+  <title>AI app review sentiment — Antoni</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="../../index.html#top">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Antoni</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../../index.html#projects">&larr; All projects</a></li>
+        <li><a href="../../index.html#about">About</a></li>
+        <li><a href="../../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="section section--projects">
+      <div class="container">
+        <article class="case">
+          <header class="case-head">
+            <p class="case-kicker">Sentiment Analysis &middot; Google Play Store</p>
+            <h1 class="case-title">
+              ChatGPT vs Gemini vs Claude: what 8,480 reviews really say
+            </h1>
+            <p class="case-summary">
+              I collected the most recent English reviews of the three leading AI
+              assistants, cleaned them into an analysis-ready dataset, and scored every
+              review with VADER. The question was not simply <em>which app is rated
+              higher</em>, but <em>what each user base is actually complaining about</em>
+              &mdash; and whether the star ratings agree with what people actually wrote.
+            </p>
+
+            <p class="case-why">
+              <strong>Why sentiment analysis?</strong> A star rating tells you how many
+              people are unhappy, but not why. Reading the reviews turns thousands of
+              free-text opinions into comparable numbers, so each app&rsquo;s complaints can
+              be counted, ranked and explained.
+            </p>
+
+            <ul class="chips case-tags" aria-label="Tools and techniques">
+              <li class="chip">Python</li>
+              <li class="chip">pandas</li>
+              <li class="chip">google-play-scraper</li>
+              <li class="chip">VADER</li>
+              <li class="chip">matplotlib</li>
+            </ul>
+
+            <div class="case-meta">
+              <p class="case-date">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+                     aria-hidden="true" focusable="false">
+                  <rect x="3" y="5" width="18" height="16" rx="2.5"/>
+                  <path d="M8 3v4M16 3v4M3 10h18"/>
+                </svg>
+                <span>Data collected on October 28, 2026.</span>
+              </p>
+
+              <a class="case-source"
+                 href="https://github.com/antoni-ho/antoni-ho.github.io"
+                 target="_blank" rel="noopener noreferrer">
+                <span>View source code on GitHub</span>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+                     aria-hidden="true" focusable="false">
+                  <path d="M5 12h14M13 6l6 6-6 6"/>
+                </svg>
+              </a>
+            </div>
+          </header>
+
+          <ul class="case-stats">
+            <li>
+              <span class="case-stat-value">8,480</span>
+              <span class="case-stat-label">Reviews analysed</span>
+            </li>
+            <li>
+              <span class="case-stat-value">79.1%</span>
+              <span class="case-stat-label">ChatGPT positive</span>
+            </li>
+            <li>
+              <span class="case-stat-value">14.8%</span>
+              <span class="case-stat-label">Claude negative</span>
+            </li>
+            <li>
+              <span class="case-stat-value">4&times;</span>
+              <span class="case-stat-label">Claude vs ChatGPT: more likely to be negative</span>
+            </li>
+          </ul>
+
+          <div class="case-findings">
+            <div class="finding">
+              <span class="finding-tag finding-tag--pos">ChatGPT</span>
+              <h2 class="finding-title">Highest satisfaction, fewest complaints</h2>
+              <p>
+                79.1% of reviews are positive and only 3.7% negative &mdash; four times
+                fewer than Claude. Praise is emotional rather than functional, and the
+                rare complaints target <em>wrong answers</em>, <em>slow responses</em> and
+                <em>image generation</em>.
+              </p>
+            </div>
+
+            <div class="finding">
+              <span class="finding-tag finding-tag--neu">Gemini</span>
+              <h2 class="finding-title">Indifferent more than unhappy</h2>
+              <p>
+                Gemini holds the highest neutral share (22.1%) and the weakest positive
+                consensus (70.9%). Its negative reviews lean on <em>useless</em> and
+                <em>waste</em> &mdash; a product that leaves many users without a strong
+                opinion either way.
+              </p>
+            </div>
+
+            <div class="finding">
+              <span class="finding-tag finding-tag--neg">Claude</span>
+              <h2 class="finding-title">More complaints about access than answers</h2>
+              <p>
+                Claude carries the largest negative share (14.8%). About two in five of
+                its negative reviews mention an <em>account</em>, <em>limit</em> or
+                billing problem &mdash; versus under one in ten for Gemini &mdash; and
+                access complaints outnumber complaints about the answers.
+              </p>
+            </div>
+          </div>
+
+          <figure class="case-figure">
+            <img
+              src="images/web/sentiment_distribution.webp"
+              alt="Horizontal bar chart comparing positive, neutral and negative review shares for ChatGPT, Gemini and Claude."
+              width="1600" height="893" loading="lazy" decoding="async" />
+            <figcaption>
+              Sentiment mix per application, scored with VADER across 8,480 reviews.
+              ChatGPT leads on positive share; Claude carries the heaviest negative tail.
+            </figcaption>
+          </figure>
+
+          <figure class="case-figure case-figure--stacked">
+            <img
+              src="images/web/sentiment_distribution_sensitivity.webp"
+              alt="Side-by-side charts comparing sentiment shares before and after removing reviews shorter than three words."
+              width="1600" height="708" loading="lazy" decoding="async" />
+            <figcaption>
+              <strong>Why this check?</strong> Very short reviews (&ldquo;good&rdquo;,
+              &ldquo;nice&rdquo;) are usually treated as low-information noise, so removing
+              them was worth testing. The test said no: dropping them lifted every
+              app&rsquo;s negative share, and Gemini almost doubled, from 7.1% to 14.9%.
+              So the full dataset was kept for the analysis.
+            </figcaption>
+          </figure>
+
+          <aside class="case-method" aria-label="Methodology validation">
+            <div class="case-method-body">
+              <p class="case-method-label">Methodology validation</p>
+              <p>
+                Every number and word cloud on this page comes from the
+                <strong>cleaned text</strong>. Cleaning strips punctuation, numbers and
+                emoji so that one word is not split into several entries
+                (&ldquo;good!!!&rdquo;, &ldquo;good&rdquo;, &ldquo;good&#128077;&rdquo;)
+                and so that symbols are not counted as if they were words.
+              </p>
+              <p>
+                To check this did not change the story, the same reviews were scored
+                twice: raw text agrees with the star rating 73.5% of the time, cleaned
+                text 73.2% &mdash; a 0.3-point gap. The star rating is only a proxy, not
+                ground truth: a five-star review can still contain a complaint.
+              </p>
+            </div>
+            <ul class="case-method-stats">
+              <li><strong>73.5%</strong><span>raw text</span></li>
+              <li><strong>73.2%</strong><span>cleaned text</span></li>
+            </ul>
+          </aside>
+
+          <div class="case-clouds">
+            <figure class="case-figure">
+              <span class="finding-tag finding-tag--pos">ChatGPT</span>
+              <img
+                src="images/web/wordcloud_negative_chatgpt.webp"
+                alt="Word cloud of negative ChatGPT reviews in which the words time and image are the largest, followed by wrong and hate."
+                width="1444" height="821" loading="lazy" decoding="async" />
+              <figcaption>
+                Based on 104 negative reviews &mdash; <em>time</em> and <em>image</em> are
+                the largest, so the complaints are about waiting too long and failed image
+                generation. <em>wrong</em>, <em>problem</em> and <em>hate</em> follow
+                almost tied, all describing answers that miss the mark.
+              </figcaption>
+            </figure>
+
+            <figure class="case-figure">
+              <span class="finding-tag finding-tag--neu">Gemini</span>
+              <img
+                src="images/web/wordcloud_negative_gemini.webp"
+                alt="Word cloud of negative Gemini reviews in which the word bad is by far the largest, followed by assistant, useless and waste."
+                width="1444" height="821" loading="lazy" decoding="async" />
+              <figcaption>
+                Based on 197 negative reviews &mdash; <em>bad</em> is by far the largest,
+                then <em>assistant</em>, <em>useless</em> and <em>waste</em>: users
+                describe the app as a useless assistant that wastes their time.
+              </figcaption>
+            </figure>
+
+            <figure class="case-figure">
+              <span class="finding-tag finding-tag--neg">Claude</span>
+              <img
+                src="images/web/wordcloud_negative_claude.webp"
+                alt="Word cloud of negative Claude reviews in which account and limit are the largest, followed by verification and paid."
+                width="1444" height="821" loading="lazy" decoding="async" />
+              <figcaption>
+                Based on 428 negative reviews &mdash; <em>account</em> is the largest word,
+                followed by <em>time</em>, <em>limit</em> and <em>bad</em>.
+                <em>verification</em> and <em>paid</em> rank just below, and both point to
+                the same friction: logging in, hitting message caps and paying.
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="case-praise">
+            <div class="case-praise-body">
+              <p class="case-method-label">What users praise</p>
+              <p>
+                The positive side looks almost identical across the three apps. The words
+                are everyday praise &mdash; <em>best</em>, <em>nice</em>, <em>great</em>,
+                <em>love</em> &mdash; the same vocabulary people use for any app that
+                simply works, not for something that feels revolutionary.
+              </p>
+            </div>
+
+            <figure class="case-figure">
+              <img
+                src="images/web/wordcloud_positive.webp"
+                alt="Word cloud of positive reviews for all three apps, dominated by the words best, nice, great and love."
+                width="1444" height="821" loading="lazy" decoding="async" />
+              <figcaption>
+                Based on 6,250 positive reviews across ChatGPT, Gemini and Claude.
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="case-close">
+            <section class="case-close-block" aria-labelledby="implications-title">
+              <p class="case-method-label" id="implications-title">Business implications</p>
+              <ul class="case-impacts">
+                <li>
+                  <strong>ChatGPT</strong> &mdash; people already trust the answers. The
+                  few complaints are about waiting, and about pictures that fail to
+                  generate.
+                </li>
+                <li>
+                  <strong>Gemini</strong> &mdash; people are not angry, they are not
+                  convinced the app is useful. Showing what it can do matters more than
+                  polishing the answers.
+                </li>
+                <li>
+                  <strong>Claude</strong> &mdash; people are not saying the answers are
+                  bad. They are saying they cannot get in or use it enough, so fixing
+                  limits, checks and billing would help more than a smarter model.
+                </li>
+              </ul>
+            </section>
+
+            <section class="case-close-block" aria-labelledby="scope-title">
+              <p class="case-method-label" id="scope-title">Scope &amp; limits</p>
+              <p>
+                These numbers describe 8,480 English reviews &mdash; the 3,000 newest per
+                app, collected on 28 October 2026. Because review volume differs, that
+                window is about one day for ChatGPT but three weeks for Claude, and VADER
+                misses sarcasm, negation and context. Read the ranking as a signal rather
+                than a verdict on product quality.
+              </p>
+            </section>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="copyright">
+        &copy; <span id="year">2026</span> Antoni. All rights reserved.
+      </p>
+
+      <ul class="footer-social" aria-label="Social links">
+        <li>
+          <a href="https://github.com/antoni-ho" target="_blank" rel="noopener noreferrer">
+            <span class="sr-only">GitHub</span>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.72-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.73.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.35.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/antoni-h20/" target="_blank" rel="noopener noreferrer">
+            <span class="sr-only">LinkedIn</span>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:antoni72@sci.ui.ac.id">
+            <span class="sr-only">Email</span>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="3" y="5" width="18" height="14" rx="2.5"/>
+              <path d="m3.6 7.2 8.4 5.4 8.4-5.4"/>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    // Keep the copyright year current without a build step.
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+

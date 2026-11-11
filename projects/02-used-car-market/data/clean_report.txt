@@ -1,0 +1,53 @@
+CLEANING REPORT
+================================================================
+rows read                : 12,000
+
+1. drop invalid rows     : -0  -> 12,000
+2. brand normalised      : 58 distinct brands
+3. drop duplicates       : -1,471  -> 10,529 (12.3%)
+4. drop year outside 2005-2026  : -45  -> 10,484
+4. drop price outside 10M-50B   : -0  -> 10,484
+4. drop transmission unknown    : -0  -> 10,484
+
+final rows               : 10,484
+unique sellers           : 899
+output                   : data\clean.csv.gz (4.11 MB gzipped)
+
+-- flag prevalence (share of listings whose description mentions it) --
+   flag_pajak_hidup          1,085   10.3%
+   flag_pajak_mati               4    0.0%
+   flag_tangan_pertama       2,905   27.7%
+   flag_service_record       5,204   49.6%
+   flag_km_asli                 51    0.5%
+   flag_nego                 1,909   18.2%
+
+-- composition (unweighted sample vs weighted market estimate) --
+   transmission:
+      Automatic      sample  92.0%   market  90.5%
+      Manual         sample   8.0%   market   9.5%
+   origin:
+      Japan          sample  57.4%   market  57.5%
+      Europe         sample  20.0%   market  19.1%
+      China          sample  10.7%   market   8.0%
+      Korea          sample   7.4%   market   6.6%
+      USA            sample   2.8%   market   1.5%
+      Other          sample   1.9%   market   7.3%
+
+-- year coverage of the analysis set --
+   2026  1,200
+   2025    980
+   2024  1,190
+   2023  1,363
+   2022  1,165
+   2021    892
+   2020    389
+   2019    692
+   2018    550
+   2017    480
+   2016    323
+   2015    288
+   2014    260
+   2013    265
+   2012    190
+   2011    107
+   2010     65

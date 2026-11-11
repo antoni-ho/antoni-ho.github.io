@@ -1,0 +1,131 @@
+HEDONIC PRICE MODEL
+======================================================================
+rows            : 10,484
+target          : log(price), median Rp 295,000,000
+features        : 6 numeric + 7 binary + 7 categorical
+brands / models : 57 / 503
+
+-- baseline: median of the same model-year --
+   RMSE(log) 0.2325   R2 0.935   MdAPE 5.9%   within 10%: 67.4%
+
+-- ridge --
+   RMSE(log) 0.2605   R2 0.918   MdAPE 11.3%   within 10%: 45.9%
+   improvement over baseline (RMSE): -12.1%
+
+-- random forest --
+   RMSE(log) 0.1890   R2 0.957   MdAPE 6.6%   within 10%: 64.4%
+   improvement over baseline (RMSE): +18.7%
+
+-- gradient boosting --
+   RMSE(log) 0.1515   R2 0.972   MdAPE 5.6%   within 10%: 71.6%
+   improvement over baseline (RMSE): +34.8%
+
+-- stress test: GroupKFold by model (an unseen model series) --
+   gradient boosting  RMSE(log) 0.3827   R2 0.824   MdAPE 22.0%
+   cost of an unseen model vs KFold: +152.6% RMSE
+
+-- summary (baseline = median of the same model-year) --
+model                 RMSE(log)  vs base     R2   MdAPE   vs base    ±10%
+baseline                 0.2325           0.935    5.9%             67.4%
+ridge                    0.2605   +12.1%  0.918   11.3%    +5.4pp   45.9%
+random forest            0.1890   -18.7%  0.957    6.6%    +0.7pp   64.4%
+gradient boosting        0.1515   -34.8%  0.972    5.6%    -0.3pp   71.6%
+
+-- permutation importance (gradient boosting, on a 20% holdout) --
+   brand                 +0.4930 (+/-0.0099)
+   model_g               +0.3367 (+/-0.0087)
+   age                   +0.2767 (+/-0.0043)
+   engine_cc             +0.2742 (+/-0.0079)
+   mileage_km            +0.1445 (+/-0.0054)
+   body_type             +0.0518 (+/-0.0042)
+   km_per_year           +0.0177 (+/-0.0011)
+   seats                 +0.0160 (+/-0.0010)
+   fuel_type             +0.0147 (+/-0.0008)
+   transmission          +0.0061 (+/-0.0007)
+   province              +0.0028 (+/-0.0005)
+   engine_hp             +0.0012 (+/-0.0001)
+   flag_tangan_pertama   +0.0008 (+/-0.0002)
+   flag_nego             +0.0008 (+/-0.0002)
+
+-- mean residual by brand (positive = listed above model expectation) --
+   MINI                +2.1%   n=131
+   Land Rover          +1.4%   n=149
+   Porsche             +0.9%   n=148
+   Mercedes-Benz       +0.8%   n=709
+   BMW                 +0.8%   n=619
+   Nissan              +0.7%   n=372
+   Kia                 +0.7%   n=145
+   Honda               +0.4%   n=1,079
+   Toyota              +0.4%   n=1,872
+   Suzuki              +0.4%   n=580
+   Wuling              +0.3%   n=221
+   Volkswagen          +0.2%   n=113
+   Chery               +0.2%   n=258
+   Lexus               +0.1%   n=339
+   Daihatsu            -0.2%   n=556
+   BYD                 -0.2%   n=270
+   Hyundai             -0.2%   n=626
+   MG                  -0.2%   n=103
+   Mitsubishi          -0.3%   n=651
+   Mazda               -0.5%   n=495
+
+-- model B: specifications only (brand and model withheld) --
+   RMSE(log) 0.2447   R2 0.928   MdAPE 10.9%   within 10%: 47.1%
+   residual below = how much the market pays for identity on top of specs
+
+-- spec-adjusted premium by brand (n >= 100) --
+   Land Rover         +27.5%   n=149
+   Volkswagen         +10.1%   n=113
+   Porsche             +7.9%   n=148
+   Honda               +7.0%   n=1,079
+   Mitsubishi          +6.0%   n=651
+   Lexus               +5.2%   n=339
+   Mercedes-Benz       +1.2%   n=709
+   Toyota              +0.4%   n=1,872
+   Hyundai             -1.0%   n=626
+   Mazda               -1.1%   n=495
+   Daihatsu            -2.5%   n=556
+   Kia                 -4.4%   n=145
+   BYD                 -5.3%   n=270
+   Suzuki              -5.6%   n=580
+   Chery               -6.7%   n=258
+   BMW                 -7.5%   n=619
+   Nissan              -8.1%   n=372
+   MG                 -14.2%   n=103
+   MINI               -14.5%   n=131
+   Wuling             -20.6%   n=221
+
+-- priced furthest below specifications (n >= 25) --
+   Wuling Cortez                 -31.0%   n=29
+   BYD Atto 1                 -26.7%   n=48
+   MINI Countryman             -25.3%   n=62
+   Wuling Almaz                  -24.4%   n=63
+   Chery Tiggo Cross            -20.2%   n=32
+   Nissan Grand Livina           -18.3%   n=43
+   BMW X5                     -18.0%   n=90
+   BMW 320i                   -16.3%   n=71
+   Suzuki Fronx                  -16.1%   n=38
+   BYD Atto 3                 -15.6%   n=25
+-- priced furthest above specifications --
+   Land Rover Defender               +78.7%   n=51
+   Jeep Wrangler               +53.7%   n=54
+   Honda Civic                  +32.8%   n=43
+   Honda CR-V                   +28.1%   n=220
+   Denza D9                     +24.1%   n=35
+   Land Rover Range Rover            +20.4%   n=45
+   Honda Freed                  +18.7%   n=33
+   Lexus RX 300                 +16.4%   n=53
+   Mercedes-Benz E300                   +15.2%   n=58
+   BYD Sealion 7              +14.9%   n=55
+
+-- location effect inside the full model (same car, same year) --
+   Jawa Barat           +0.3%   n=1,370
+   Jawa Timur           -0.2%   n=518
+   DKI Jakarta          -0.3%   n=6,256
+   Banten               -0.3%   n=2,160
+   spread between provinces: 0.7 pp
+
+saved images\07_location_and_brand.png
+saved images\08_model_bargains.png
+
+saved images\06_feature_importance.png

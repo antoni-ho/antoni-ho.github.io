@@ -1,0 +1,59 @@
+VERIFICATION REPORT
+dataset: 10,484 rows
+
+======================================================================
+CLAIM 1  brand retention
+======================================================================
+brands compared        : 9
+rank correlation       : 0.867
+median absolute gap    : 1.05 pp
+brand              fitted   2-point     gap
+Suzuki              95.6%     95.3%   +0.3pp
+Daihatsu            95.1%     96.2%   -1.1pp
+Toyota              94.4%     94.1%   +0.2pp
+Mitsubishi          94.1%     94.6%   -0.5pp
+Honda               93.1%     92.1%   +1.0pp
+Mazda               91.8%     91.2%   +0.6pp
+Mercedes-Benz       87.9%     89.3%   -1.4pp
+Hyundai             87.5%     92.9%   -5.4pp
+BMW                 87.0%     83.9%   +3.1pp
+
+======================================================================
+CLAIM 2  automatic premium, like-for-like
+======================================================================
+cells                       : 24
+median of ratios            : +5.8%
+weighted mean of log ratios : +7.2%
+bootstrap 95% CI (median)   : [+3.1%, +10.6%]
+raw, all listings pooled    : +125.3%
+agreement between estimators: 1.4 pp difference
+
+======================================================================
+CLAIM 3  the odometer is barely priced
+======================================================================
+(a) within-cell slope, all cells with >=2 rows
+    slope -0.0399 on log(1+km), n=7,971
+    20k -> 100k km costs -6.2%
+(b) only cells with a >=30,000 km spread
+    294 cells, n=3,850, slope -0.0401
+    20k -> 100k km costs -6.3%
+    bootstrap 95% CI for slope: [-0.0501, -0.0306]
+
+(d) concrete cases: same model, same year, different odometer
+    model-year                                        low km               high km     gap
+    BMW 218i 2023                        12,500 km /    474M   35,000 km /    509M    7.4%
+    BMW 330i 2021                        17,500 km /    639M   42,500 km /    615M   -3.8%
+    BMW 330i 2022                         7,500 km /    679M   22,500 km /    707M    4.1%
+    BMW 330i 2024                         2,500 km /    854M   12,500 km /    880M    3.0%
+    BMW M4 2022                           2,500 km /  1,890M    8,000 km /  1,835M   -2.9%
+    BMW M4 2023                           5,000 km /  1,956M   15,000 km /  2,062M    5.5%
+    BMW X1 2017                          35,000 km /    248M   72,500 km /    224M   -9.5%
+    BMW X1 2019                          27,500 km /    325M   72,500 km /    280M  -13.8%
+
+(e) slope by segment (cells with >=2 rows)
+    luxury brands    slope -0.0586  n=1,675
+    mass market      slope -0.0347  n=6,296
+    manual cars      slope -0.0227  n=497
+    automatic cars   slope -0.0386  n=7,318
+    age 0-3          slope -0.0263  n=2,874
+    age 4-9          slope -0.0566  n=3,879

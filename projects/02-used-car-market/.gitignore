@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Scratch
+_tmp/
+_tmptest/
+
+# Raw crawl artifacts. Large and fully regenerable:
+#   python enumerate_urls.py && python scrape.py
+urls.txt
+raw_samples/
+data/listings.jsonl
+data/attempted.txt
+data/failures.jsonl
+data/run_report.txt
+data/audit/
+
+# Kept in version control: the scripts, METHODOLOGY.md, the README and the
+# cleaned analysis dataset (data/clean.csv.gz) once stage 2 produces it.

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Hedonic pricing of 10,484 used-car listings from Mobil123: which brands hold their value, and why the automatic premium and the odometer turn out to be segment illusions." />
+  <meta name="theme-color" content="#0b0a09" />
+  <meta name="author" content="Antoni" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Which used cars actually hold their value?" />
+  <meta property="og:description" content="10,484 live listings, one hedonic model, and three things buyers think they are paying for that mostly disappear." />
+  <title>Used-car value retention — Antoni</title>
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="../../index.html#top">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Antoni</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../../index.html#projects">&larr; All projects</a></li>
+        <li><a href="../../index.html#about">About</a></li>
+        <li><a href="../../index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="section section--projects">
+      <div class="container">
+        <article class="case">
+
+          <header class="case-head">
+            <p class="case-kicker">Hedonic pricing &middot; Mobil123</p>
+            <h1 class="case-title">Which used cars actually hold their value?</h1>
+
+            <p class="case-summary">
+              I scraped 12,000 live listings from Mobil123 into 10,484 unique cars, then
+              priced them with a hedonic model that holds model and year constant. The
+              question was not <em>what does a used car cost</em> &mdash; it was
+              <em>what does the market actually charge for</em>.
+            </p>
+
+            <p class="case-why">
+              <strong>Why this question?</strong> Conventional wisdom says a car loses value
+              on a predictable curve. Indonesian listings suggest something stranger: the
+              asking price is set almost entirely by <em>which car</em> it is and
+              <em>what year</em>, while the things buyers believe they are negotiating
+              over &mdash; the transmission, the odometer, the city &mdash; move the number
+              by a few percent at most.
+            </p>
+
+            <ul class="chips case-tags" aria-label="Tools and techniques">
+              <li class="chip">Python</li>
+              <li class="chip">pandas</li>
+              <li class="chip">scikit-learn</li>
+              <li class="chip">matplotlib</li>
+              <li class="chip">Hedonic regression</li>
+            </ul>
+
+            <div class="case-meta">
+              <p class="case-date">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+                     aria-hidden="true" focusable="false">
+                  <rect x="3" y="5" width="18" height="16" rx="2.5"/>
+                  <path d="M8 3v4M16 3v4M3 10h18"/>
+                </svg>
+                <span>Listings collected on November 10, 2026.</span>
+              </p>
+
+              <a class="case-source"
+                 href="https://github.com/antoni-ho/antoni-ho.github.io/tree/main/projects/02-used-car-market"
+                 target="_blank" rel="noopener noreferrer">
+                <span>View source code on GitHub</span>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
+                     aria-hidden="true" focusable="false">
+                  <path d="M5 12h14M13 6l6 6-6 6"/>
+                </svg>
+              </a>
+            </div>
+          </header>
+
+          <ul class="case-stats">
+            <li>
+              <span class="case-stat-value">10,484</span>
+              <span class="case-stat-label">Unique cars analysed</span>
+            </li>
+            <li>
+              <span class="case-stat-value">59,037</span>
+              <span class="case-stat-label">Live listings enumerated</span>
+            </li>
+            <li>
+              <span class="case-stat-value">0.97</span>
+              <span class="case-stat-label">R&sup2; on log price</span>
+            </li>
+            <li>
+              <span class="case-stat-value">&plusmn;5.6%</span>
+              <span class="case-stat-label">Median pricing error</span>
+            </li>
+          </ul>
+
+          <div class="case-findings">
+            <div class="finding">
+              <span class="finding-tag finding-tag--pos">Retention</span>
+              <h2 class="finding-title">Depreciation is a brand trait, and the gap is 3&times;</h2>
+              <p>
+                Suzuki loses 4.4% of its value per year of age, Toyota 5.6%, BMW 13.0%.
+                The ordering matches market folklore &mdash; Japanese holds, European
+                falls &mdash; but the size of the gap is the story: a BMW loses its value
+                three times faster than a Suzuki.
+              </p>
+            </div>
+
+            <div class="finding">
+              <span class="finding-tag finding-tag--neu">Transmission</span>
+              <h2 class="finding-title">The automatic premium is mostly a segment illusion</h2>
+              <p>
+                Pooled, automatic cars list 125% above manual ones. Inside a model and year,
+                the premium collapses to <strong>+5.8%</strong>. The 125% was never about
+                the gearbox: manuals survive only in pickups, vans and the cheapest city
+                cars.
+              </p>
+            </div>
+
+            <div class="finding">
+              <span class="finding-tag finding-tag--neg">Odometer</span>
+              <h2 class="finding-title">High mileage costs far less than it looks</h2>
+              <p>
+                The highest-mileage quintile lists 74% below the lowest. Compare two cars of
+                the same model and year and the gap is <strong>&minus;4.1%</strong>. Even
+                past 150,000 km the discount is under 5%.
+              </p>
+            </div>
+          </div>
+
+          <figure class="case-figure">
+            <img
+              src="images/01_brand_retention.png"
+              alt="Horizontal bar chart of annual value loss by brand: Suzuki 4.4 percent, Daihatsu 4.9, Toyota 5.6, Mitsubishi 5.9, Honda 6.9, Mazda 8.2, Mercedes-Benz 12.1, Hyundai 12.5, BMW 13.0."
+              loading="lazy" decoding="async" />
+            <figcaption>
+              Value lost per year of vehicle age, median across a brand&rsquo;s model
+              series. Each series is fitted on its own age profile, so the comparison is
+              age-controlled. Bars show the spread across a brand&rsquo;s models; n is the
+              number of model series available.
+            </figcaption>
+          </figure>
+
+          <figure class="case-figure">
+            <img
+              src="images/02_retention_curves.png"
+              alt="Small multiples of retention curves for eight popular models, showing price index against vehicle age."
+              loading="lazy" decoding="async" />
+            <figcaption>
+              <strong>Not a straight line.</strong> The Alphard sheds roughly half its value
+              in four years and then flattens; the Avanza declines gently and stays there.
+              Two cars of the same age can lose value at completely different speeds
+              depending on the shape of their curve, which is why a single
+              &ldquo;average depreciation&rdquo; number is misleading.
+            </figcaption>
+          </figure>
+
+          <div class="case-clouds">
+            <figure class="case-figure">
+              <img
+                src="images/03_transmission_premium.png"
+                alt="Three panels: pooled automatic and manual median prices; per model-year automatic premium; premium by age band."
+                loading="lazy" decoding="async" />
+              <figcaption>
+                <strong>The same comparison, twice.</strong> Pooled, automatics cost
+                +125% more (left). Compared within the same model and year, the median
+                premium is +5.8%, with a 95% confidence interval of +3.1% to +10.6%
+                (centre). Only one eligible model-year sits above age five, so the
+                age trend is indicative, not established.
+              </figcaption>
+            </figure>
+
+            <figure class="case-figure">
+              <img
+                src="images/04_mileage_illusion.png"
+                alt="Left: median price by odometer quintile, falling 74 percent. Right: distribution of within model-year high versus low mileage price gaps, median minus 4.1 percent."
+                loading="lazy" decoding="async" />
+              <figcaption>
+                <strong>The odometer, honestly.</strong> Left panel uses all 8,878 listings
+                that report a mileage. Right panel compares the highest-mileage third
+                against the lowest third of the <em>same</em> model-year: 504 model-years,
+                median odometer 22,500 km against 62,500 km, median gap &minus;4.1%.
+              </figcaption>
+            </figure>
+          </div>
+
+          <figure class="case-figure">
+            <img
+              src="images/06_feature_importance.png"
+              alt="Permutation importance of model features, dominated by brand, model, age and engine capacity, with transmission, province and seller claims near zero."
+              loading="lazy" decoding="async" />
+            <figcaption>
+              What the model actually uses. Brand and model identity dominate, followed by
+              age and engine capacity. Transmission, province and every claim written in the
+              listing description contribute less than one percent each &mdash; the
+              quantitative version of the two charts above.
+            </figcaption>
+          </figure>
+
+          <div class="case-clouds">
+            <figure class="case-figure">
+              <img
+                src="images/07_location_and_brand.png"
+                alt="Left: province price gaps all within 0.7 percentage points. Right: specification-adjusted premium by brand, from Land Rover plus 27.5 percent to Wuling minus 20.6 percent."
+                loading="lazy" decoding="async" />
+              <figcaption>
+                <strong>Location, versus the badge.</strong> Once the car and year are held
+                constant, the four best-covered provinces sit within 0.7 percentage points
+                of each other &mdash; geography is not a pricing dimension on this platform.
+                What the badge is worth net of specifications is a different matter
+                entirely.
+              </figcaption>
+            </figure>
+
+            <figure class="case-figure">
+              <img
+                src="images/08_model_bargains.png"
+                alt="Diverging bar chart of model series priced furthest from their specification-predicted value, from Wuling Cortez minus 31 percent to Land Rover Defender plus 78.7 percent."
+                loading="lazy" decoding="async" />
+              <figcaption>
+                Where price and specifications disagree most. Blue models list below the
+                value of their measured specifications &mdash; either underrated, or
+                carrying a drawback the specifications miss. The Chinese brands are
+                consistently specification-rich and price-poor.
+              </figcaption>
+            </figure>
+          </div>
+
+          <figure class="case-figure">
+            <img
+              src="images/05_market_structure.png"
+              alt="Three panels: listings by model year showing a thin 2020 cohort, body types dominated by SUV and MPV, and brand origin dominated by Japan."
+              loading="lazy" decoding="async" />
+            <figcaption>
+              What the marketplace contains. SUVs and MPVs account for roughly seven in ten
+              listings, Japanese brands for 57%. The thin 2020 bar is a production cohort
+              effect: few cars were built and sold that year, so few are on sale now.
+            </figcaption>
+          </figure>
+
+          <aside class="case-method" aria-label="Methodology validation">
+            <div class="case-method-body">
+              <p class="case-method-label">Methodology validation</p>
+              <p>
+                A naive baseline &mdash; the median price of the same model and year &mdash;
+                reaches a <strong>5.9%</strong> median error on its own. That is a hard
+                baseline, and any model has to earn its place against it. Gradient boosting
+                wins on the tails (<strong>RMSE &minus;34.8%</strong>) but barely on the
+                typical car (<strong>MdAPE 5.6%</strong>).
+              </p>
+              <p>
+                Two checks keep the result honest. First, withhold brand and model from the
+                model and the error more than doubles &mdash; identity is the price.
+                Second, hide entire model series at validation time: RMSE rises from 0.152
+                to 0.383, a 153% penalty, which tells you how much of the accuracy comes
+                from knowing the model rather than understanding the car.
+              </p>
+            </div>
+            <ul class="case-method-stats">
+              <li><strong>5.9%</strong><span>baseline MdAPE</span></li>
+              <li><strong>5.6%</strong><span>gradient boosting</span></li>
+              <li><strong>+153%</strong><span>RMSE, unseen model</span></li>
+            </ul>
+          </aside>
+
+          <div class="case-close">
+            <section class="case-close-block" aria-labelledby="implications-title">
+              <p class="case-method-label" id="implications-title">What this means</p>
+              <ul class="case-impacts">
+                <li>
+                  <strong>For buyers</strong> &mdash; the asking price is the model and the
+                  year. Mileage and transmission are where negotiation actually lives,
+                  because the sticker barely prices them. A high-mileage car of the right
+                  model and year is where the discount is.
+                </li>
+                <li>
+                  <strong>For sellers</strong> &mdash; a full service history, first-owner
+                  status and a low odometer do not show up in the asking price on this
+                  platform. They may still matter at the negotiating table, but they are not
+                  what the market pays for on paper.
+                </li>
+                <li>
+                  <strong>For analysts</strong> &mdash; a median-by-model-year lookup is a
+                  strong baseline that a linear model could not beat. Most of the apparent
+                  signal in this market is composition, and holding model and year constant
+                  is the cheapest way to see through it.
+                </li>
+              </ul>
+            </section>
+
+            <section class="case-close-block" aria-labelledby="scope-title">
+              <p class="case-method-label" id="scope-title">Scope &amp; limits</p>
+              <p>
+                One platform, one snapshot: 10,484 cars after removing 12.3% duplicate
+                listings, collected on 10 November 2026. Every price is an
+                <em>asking</em> price, never a transaction. 97.7% of listings come from
+                dealers, so private-seller pricing is almost unobserved. The sample is
+                stratified by brand rather than self-weighting, which is why the dataset
+                carries a weight column. Finally, only four provinces have enough listings
+                to compare, so the location result describes Java, not all of Indonesia.
+              </p>
+            </section>
+          </div>
+
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="copyright">
+        &copy; <span id="year">2026</span> Antoni. All rights reserved.
+      </p>
+
+      <ul class="footer-social" aria-label="Social links">
+        <li>
+          <a href="https://github.com/antoni-ho" target="_blank" rel="noopener noreferrer">
+            <span class="sr-only">GitHub</span>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.33.95.1-.74.4-1.24.72-1.53-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 5.74 0c2.19-1.49 3.15-1.18 3.15-1.18.62 1.58.23 2.75.11 3.04.73.81 1.18 1.84 1.18 3.1 0 4.43-2.69 5.41-5.25 5.69.41.35.78 1.05.78 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5Z"/>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/antoni-h20/" target="_blank" rel="noopener noreferrer">
+            <span class="sr-only">LinkedIn</span>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:antoni72@sci.ui.ac.id">
+            <span class="sr-only">Email</span>
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <rect x="3" y="5" width="18" height="14" rx="2.5"/>
+              <path d="m3.6 7.2 8.4 5.4 8.4-5.4"/>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
