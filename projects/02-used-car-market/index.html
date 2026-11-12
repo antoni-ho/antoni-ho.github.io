@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Hedonic pricing of 10,484 used-car listings from Mobil123: which brands hold their value, and why the automatic premium and the odometer turn out to be segment illusions." />
+  <meta name="description" content="A regression model of 10,484 used-car listings in Indonesia: what the asking price really depends on, and why the badge matters far more than the specifications." />
   <meta name="theme-color" content="#0b0a09" />
   <meta name="author" content="Antoni" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Which used cars actually hold their value?" />
-  <meta property="og:description" content="10,484 live listings, one hedonic model, and three things buyers think they are paying for that mostly disappear." />
-  <title>Used-car value retention — Antoni</title>
+  <meta property="og:title" content="What the Indonesian used-car market actually charges for" />
+  <meta property="og:description" content="10,484 live listings and one regression model: three things buyers think they are paying for turn out to matter far less than the model and the year." />
+  <title>Indonesian used-car prices — Antoni</title>
   <link rel="stylesheet" href="../../style.css" />
 </head>
 
@@ -36,12 +36,12 @@
         <article class="case">
 
           <header class="case-head">
-            <p class="case-kicker">Hedonic pricing &middot; Mobil123</p>
-            <h1 class="case-title">Which used cars actually hold their value?</h1>
+            <p class="case-kicker">Regression &middot; Indonesian used-car market</p>
+            <h1 class="case-title">What the Indonesian used-car market actually charges for</h1>
 
             <p class="case-summary">
               I scraped 12,000 live listings from Mobil123 into 10,484 unique cars, then
-              priced them with a hedonic model that holds model and year constant. The
+              priced them with a regression model that holds model and year constant. The
               question was not <em>what does a used car cost</em> &mdash; it was
               <em>what does the market actually charge for</em>.
             </p>
@@ -60,7 +60,7 @@
               <li class="chip">pandas</li>
               <li class="chip">scikit-learn</li>
               <li class="chip">matplotlib</li>
-              <li class="chip">Hedonic regression</li>
+              <li class="chip">Multiple regression</li>
             </ul>
 
             <div class="case-meta">
@@ -90,52 +90,56 @@
           <ul class="case-stats">
             <li>
               <span class="case-stat-value">10,484</span>
-              <span class="case-stat-label">Unique cars analysed</span>
+              <span class="case-stat-label">Cars analysed</span>
             </li>
             <li>
-              <span class="case-stat-value">59,037</span>
-              <span class="case-stat-label">Live listings enumerated</span>
+              <span class="case-stat-value">3&times;</span>
+              <span class="case-stat-label">How much faster a BMW loses value than a Suzuki</span>
             </li>
             <li>
-              <span class="case-stat-value">0.97</span>
-              <span class="case-stat-label">R&sup2; on log price</span>
+              <span class="case-stat-value">+5.8%</span>
+              <span class="case-stat-label">What an automatic adds, same model and year</span>
             </li>
             <li>
-              <span class="case-stat-value">&plusmn;5.6%</span>
-              <span class="case-stat-label">Median pricing error</span>
+              <span class="case-stat-value">4.1%</span>
+              <span class="case-stat-label">How much less a high-mileage car asks</span>
             </li>
           </ul>
 
           <div class="case-findings">
             <div class="finding">
               <span class="finding-tag finding-tag--pos">Retention</span>
-              <h2 class="finding-title">Depreciation is a brand trait, and the gap is 3&times;</h2>
+              <h2 class="finding-title">Some brands lose value three times faster than others</h2>
               <p>
-                Suzuki loses 4.4% of its value per year of age, Toyota 5.6%, BMW 13.0%.
-                The ordering matches market folklore &mdash; Japanese holds, European
-                falls &mdash; but the size of the gap is the story: a BMW loses its value
-                three times faster than a Suzuki.
+                For every extra year on the road, a Suzuki loses about 4.4% of its value, a
+                Toyota 5.6% and a BMW 13.0%. Everyone knows Japanese cars hold value
+                better; the surprise is how wide the gap is. After ten years a BMW has kept
+                roughly a quarter of what it was worth when nearly new &mdash; a Suzuki
+                about two thirds.
               </p>
             </div>
 
             <div class="finding">
               <span class="finding-tag finding-tag--neu">Transmission</span>
-              <h2 class="finding-title">The automatic premium is mostly a segment illusion</h2>
+              <h2 class="finding-title">An automatic is worth about 6% more, not 125%</h2>
               <p>
-                Pooled, automatic cars list 125% above manual ones. Inside a model and year,
-                the premium collapses to <strong>+5.8%</strong>. The 125% was never about
-                the gearbox: manuals survive only in pickups, vans and the cheapest city
-                cars.
+                Line up every automatic against every manual and the automatic looks 125%
+                dearer. That number is meaningless: it is really comparing family cars with
+                delivery vans. Compare the automatic and manual versions of the
+                <strong>same model and year</strong> and the gap falls to about
+                <strong>5.8%</strong>.
               </p>
             </div>
 
             <div class="finding">
               <span class="finding-tag finding-tag--neg">Odometer</span>
-              <h2 class="finding-title">High mileage costs far less than it looks</h2>
+              <h2 class="finding-title">High mileage costs far less than the sticker suggests</h2>
               <p>
-                The highest-mileage quintile lists 74% below the lowest. Compare two cars of
-                the same model and year and the gap is <strong>&minus;4.1%</strong>. Even
-                past 150,000 km the discount is under 5%.
+                Group every listing by mileage and the highest-mileage group asks 74% less.
+                But those are mostly old, cheap models. Compare two cars of the
+                <strong>same model and year</strong>: the one with nearly three times the
+                kilometres asks only about <strong>4% less</strong>, and even past 150,000 km
+                the discount stays under 5%.
               </p>
             </div>
           </div>
@@ -146,97 +150,98 @@
               alt="Horizontal bar chart of annual value loss by brand: Suzuki 4.4 percent, Daihatsu 4.9, Toyota 5.6, Mitsubishi 5.9, Honda 6.9, Mazda 8.2, Mercedes-Benz 12.1, Hyundai 12.5, BMW 13.0."
               loading="lazy" decoding="async" />
             <figcaption>
-              Value lost per year of vehicle age, median across a brand&rsquo;s model
-              series. Each series is fitted on its own age profile, so the comparison is
-              age-controlled. Bars show the spread across a brand&rsquo;s models; n is the
-              number of model series available.
+              Each bar is how much value a brand&rsquo;s cars typically lose for every
+              extra year of age. The thin lines show how much the brand&rsquo;s own models
+              differ. Only brands with at least three models are shown, and the median is
+              used instead of an average so that one extremely expensive listing cannot
+              distort the picture.
             </figcaption>
           </figure>
 
           <figure class="case-figure">
             <img
               src="images/02_retention_curves.png"
-              alt="Small multiples of retention curves for eight popular models, showing price index against vehicle age."
+              alt="Small multiples of price curves for eight popular models, showing price index against vehicle age."
               loading="lazy" decoding="async" />
             <figcaption>
-              <strong>Not a straight line.</strong> The Alphard sheds roughly half its value
-              in four years and then flattens; the Avanza declines gently and stays there.
-              Two cars of the same age can lose value at completely different speeds
-              depending on the shape of their curve, which is why a single
-              &ldquo;average depreciation&rdquo; number is misleading.
+              Each panel is one model &mdash; the eight with the most listings. A
+              one-year-old unit is set to 100 and every older unit is drawn relative to it,
+              so a point at 40 means that age sells for 40% of the one-year-old price.
+              <strong>Read the slope, not the last point:</strong> at twelve years old the
+              car is a different generation, so the right-hand end of each curve mixes
+              depreciation with a model change.
             </figcaption>
           </figure>
 
-          <div class="case-clouds">
-            <figure class="case-figure">
-              <img
-                src="images/03_transmission_premium.png"
-                alt="Three panels: pooled automatic and manual median prices; per model-year automatic premium; premium by age band."
-                loading="lazy" decoding="async" />
-              <figcaption>
-                <strong>The same comparison, twice.</strong> Pooled, automatics cost
-                +125% more (left). Compared within the same model and year, the median
-                premium is +5.8%, with a 95% confidence interval of +3.1% to +10.6%
-                (centre). Only one eligible model-year sits above age five, so the
-                age trend is indicative, not established.
-              </figcaption>
-            </figure>
+          <figure class="case-figure">
+            <img
+              src="images/03_transmission_premium.png"
+              alt="Left: pooled automatic and manual median prices, the automatic asking 125 percent more. Right: distribution of within model-year automatic premiums, typical plus 5.8 percent, shown by age band."
+              loading="lazy" decoding="async" />
+            <figcaption>
+              <strong>The same comparison, done twice.</strong> On the left every listing is
+              pooled, and an automatic looks 125% dearer &mdash; but that is mostly
+              comparing expensive family cars with cheap vans. On the right, the automatic
+              and manual versions of the <em>same model and year</em> are compared directly:
+              the typical gap is 5.8%, likely somewhere between 3.1% and 10.6%.
+            </figcaption>
+          </figure>
 
-            <figure class="case-figure">
-              <img
-                src="images/04_mileage_illusion.png"
-                alt="Left: median price by odometer quintile, falling 74 percent. Right: distribution of within model-year high versus low mileage price gaps, median minus 4.1 percent."
-                loading="lazy" decoding="async" />
-              <figcaption>
-                <strong>The odometer, honestly.</strong> Left panel uses all 8,878 listings
-                that report a mileage. Right panel compares the highest-mileage third
-                against the lowest third of the <em>same</em> model-year: 504 model-years,
-                median odometer 22,500 km against 62,500 km, median gap &minus;4.1%.
-              </figcaption>
-            </figure>
-          </div>
+          <figure class="case-figure">
+            <img
+              src="images/04_mileage_illusion.png"
+              alt="Left: median price by mileage group, falling 74 percent. Right: distribution of within model-year high versus low mileage price gaps, typically 4.1 percent cheaper."
+              loading="lazy" decoding="async" />
+            <figcaption>
+              <strong>Left:</strong> every listing that reports a mileage, grouped into
+              fifths. The top group asks 74% less than the bottom &mdash; but those are
+              mostly older, cheaper models. <strong>Right:</strong> the fair comparison,
+              where each model-year&rsquo;s highest-mileage third is set against its lowest.
+              Each dot is one model-year; the orange band is where the true figure most
+              likely sits. The honest answer is about <strong>4% cheaper</strong>, not 74%.
+            </figcaption>
+          </figure>
 
           <figure class="case-figure">
             <img
               src="images/06_feature_importance.png"
-              alt="Permutation importance of model features, dominated by brand, model, age and engine capacity, with transmission, province and seller claims near zero."
+              alt="Permutation importance of model features, dominated by brand, model, age and engine size, with transmission, province and seller claims near zero."
               loading="lazy" decoding="async" />
             <figcaption>
-              What the model actually uses. Brand and model identity dominate, followed by
-              age and engine capacity. Transmission, province and every claim written in the
-              listing description contribute less than one percent each &mdash; the
-              quantitative version of the two charts above.
+              <strong>What the model leans on.</strong> Each bar shows how much worse the
+              prediction gets when that one detail is scrambled, so a tall bar means the
+              asking price really depends on it. Brand and model dominate; transmission,
+              province and every claim written in the listing text are almost flat.
             </figcaption>
           </figure>
 
-          <div class="case-clouds">
-            <figure class="case-figure">
-              <img
-                src="images/07_location_and_brand.png"
-                alt="Left: province price gaps all within 0.7 percentage points. Right: specification-adjusted premium by brand, from Land Rover plus 27.5 percent to Wuling minus 20.6 percent."
-                loading="lazy" decoding="async" />
-              <figcaption>
-                <strong>Location, versus the badge.</strong> Once the car and year are held
-                constant, the four best-covered provinces sit within 0.7 percentage points
-                of each other &mdash; geography is not a pricing dimension on this platform.
-                What the badge is worth net of specifications is a different matter
-                entirely.
-              </figcaption>
-            </figure>
+          <figure class="case-figure">
+            <img
+              src="images/07_location_and_brand.png"
+              alt="Left: province price gaps all within 0.7 percentage points. Right: the extra price each brand's badge adds beyond its specifications, from Land Rover plus 27.5 percent to Wuling minus 20.6 percent."
+              loading="lazy" decoding="async" />
+            <figcaption>
+              <strong>Left:</strong> the same car and year, priced in four provinces &mdash;
+              all four sit within 0.7 percentage points, so where you buy barely changes the
+              price. <strong>Right:</strong> how much more each brand asks than its
+              cars&rsquo; specifications would suggest. Land Rover and Volkswagen carry the
+              biggest premium; Wuling, MINI and MG sell furthest below their paper
+              specification.
+            </figcaption>
+          </figure>
 
-            <figure class="case-figure">
-              <img
-                src="images/08_model_bargains.png"
-                alt="Diverging bar chart of model series priced furthest from their specification-predicted value, from Wuling Cortez minus 31 percent to Land Rover Defender plus 78.7 percent."
-                loading="lazy" decoding="async" />
-              <figcaption>
-                Where price and specifications disagree most. Blue models list below the
-                value of their measured specifications &mdash; either underrated, or
-                carrying a drawback the specifications miss. The Chinese brands are
-                consistently specification-rich and price-poor.
-              </figcaption>
-            </figure>
-          </div>
+          <figure class="case-figure">
+            <img
+              src="images/08_model_bargains.png"
+              alt="Diverging bar chart of models priced furthest from what their specifications suggest, from Wuling Cortez minus 31 percent to Land Rover Defender plus 78.7 percent."
+              loading="lazy" decoding="async" />
+            <figcaption>
+              <strong>Where price and specification disagree most.</strong> Blue models sell
+              for less than their specifications suggest &mdash; either underrated, or
+              hiding a drawback the paperwork cannot show. Orange models sell for more. Only
+              models with at least 25 listings appear.
+            </figcaption>
+          </figure>
 
           <figure class="case-figure">
             <img
@@ -244,9 +249,10 @@
               alt="Three panels: listings by model year showing a thin 2020 cohort, body types dominated by SUV and MPV, and brand origin dominated by Japan."
               loading="lazy" decoding="async" />
             <figcaption>
-              What the marketplace contains. SUVs and MPVs account for roughly seven in ten
-              listings, Japanese brands for 57%. The thin 2020 bar is a production cohort
-              effect: few cars were built and sold that year, so few are on sale now.
+              <strong>What the marketplace contains.</strong> SUVs and MPVs account for
+              roughly seven in ten listings and Japanese brands for 57%. The thin 2020 bar is
+              a production effect: few cars were built and sold that year, so few are on sale
+              now.
             </figcaption>
           </figure>
 
@@ -254,24 +260,26 @@
             <div class="case-method-body">
               <p class="case-method-label">Methodology validation</p>
               <p>
-                A naive baseline &mdash; the median price of the same model and year &mdash;
-                reaches a <strong>5.9%</strong> median error on its own. That is a hard
-                baseline, and any model has to earn its place against it. Gradient boosting
-                wins on the tails (<strong>RMSE &minus;34.8%</strong>) but barely on the
-                typical car (<strong>MdAPE 5.6%</strong>).
+                Before trusting the model, it was given a lazy rival: just look up the
+                average price of the same model and year. That rival already lands within
+                <strong>5.9%</strong> of the real asking price, so any model has to beat it
+                to be worth anything. Gradient boosting does better overall
+                (<strong>34.8% less error</strong>) but only slightly better on a typical
+                car (<strong>5.6%</strong>) &mdash; most of its advantage sits in rare and
+                expensive models.
               </p>
               <p>
-                Two checks keep the result honest. First, withhold brand and model from the
-                model and the error more than doubles &mdash; identity is the price.
-                Second, hide entire model series at validation time: RMSE rises from 0.152
-                to 0.383, a 153% penalty, which tells you how much of the accuracy comes
-                from knowing the model rather than understanding the car.
+                Two checks keep the result honest. Take the brand and model away and the
+                error more than doubles: the market is paying for identity, not for
+                specifications. And when the model is asked to price a model it has never
+                seen, the error jumps by <strong>153%</strong> &mdash; it knows the car, not
+                the physics of depreciation.
               </p>
             </div>
             <ul class="case-method-stats">
-              <li><strong>5.9%</strong><span>baseline MdAPE</span></li>
-              <li><strong>5.6%</strong><span>gradient boosting</span></li>
-              <li><strong>+153%</strong><span>RMSE, unseen model</span></li>
+              <li><strong>5.9%</strong><span>lookup baseline</span></li>
+              <li><strong>5.6%</strong><span>our model</span></li>
+              <li><strong>+153%</strong><span>error on an unseen model</span></li>
             </ul>
           </aside>
 
@@ -303,13 +311,14 @@
             <section class="case-close-block" aria-labelledby="scope-title">
               <p class="case-method-label" id="scope-title">Scope &amp; limits</p>
               <p>
-                One platform, one snapshot: 10,484 cars after removing 12.3% duplicate
-                listings, collected on 10 November 2026. Every price is an
-                <em>asking</em> price, never a transaction. 97.7% of listings come from
-                dealers, so private-seller pricing is almost unobserved. The sample is
-                stratified by brand rather than self-weighting, which is why the dataset
-                carries a weight column. Finally, only four provinces have enough listings
-                to compare, so the location result describes Java, not all of Indonesia.
+                <strong>One platform, one moment.</strong> These are 10,484 cars left after
+                removing 12.3% duplicate listings from the 12,000 scraped from
+                <strong>Mobil123</strong> on 10 November 2026. Every price is an
+                <em>asking</em> price, never a completed sale. 97.7% of the listings come
+                from dealers, so private sellers are almost absent. Brands were sampled with
+                unequal quotas &mdash; that is why the dataset carries a weight column
+                &mdash; and only four provinces list enough cars to compare, so the location
+                finding describes Java, not all of Indonesia.
               </p>
             </section>
           </div>

@@ -84,7 +84,7 @@ def out(msg: str = "") -> None:
 def save(fig, name: str) -> None:
     IMAGES.mkdir(exist_ok=True)
     path = IMAGES / name
-    fig.savefig(path, bbox_inches="tight", facecolor="white")
+    fig.savefig(path, bbox_inches="tight", pad_inches=0.16, facecolor="white")
     plt.close(fig)
     out(f"   saved {path}")
 
@@ -155,12 +155,13 @@ def chart_brand_retention(series: pd.DataFrame) -> pd.DataFrame:
     ax.axvline(0, color=INK, lw=1)
     ax.set_xlim((summary["q1"].min() - 1) * 100 * 1.08, 2.4)
     ax.set_xticks([-18, -15, -12, -9, -6, -3, 0])
-    ax.set_xlabel("value lost per year of vehicle age (%)")
-    ax.set_title("Which brands actually hold their value?", loc="left", pad=16)
-    footnote(fig, "Median across model series; each series is fitted on its own "
-                  "age-profile, so the comparison is age-controlled. Bars show the "
-                  "IQR across a brand's models. n = number of model series. "
-                  "Hyundai is the least stable estimate across estimators.")
+    ax.set_xlabel("how much of its value the brand loses each year (%)")
+    ax.set_title("Which brands hold their value best?", loc="left", pad=16)
+    footnote(fig, "Each bar is the typical (median) yearly loss across that brand's "
+                  "models. The thin lines show how much the brand's models differ from "
+                  "one another. n = how many models were available for that brand. "
+                  "Median is used instead of average because a few extremely expensive "
+                  "listings would otherwise dominate.")
     save(fig, "01_brand_retention.png")
     return summary
 
@@ -196,16 +197,21 @@ def chart_retention_curves(df: pd.DataFrame, series: pd.DataFrame) -> None:
     for ax in axes[-1]:
         ax.set_xlabel("age (years)")
     for ax in axes[:, 0]:
-        ax.set_ylabel("index")
+        ax.set_ylabel("price index")
     axes[0, 0].set_ylim(0, 145)
     axes[0, 0].set_xticks(range(1, 16, 2))
 
-    fig.suptitle("Retention curves: price relative to the youngest version of the same model",
+    fig.suptitle("How fast each model loses value",
                  x=0.005, ha="left", fontsize=13.5, fontweight="bold")
-    fig.text(0.005, 0.925, "100 = the youngest used unit of that model (age 1)  ·  "
-                           "dotted line = 50% of that value",
+    fig.text(0.005, 0.945,
+             "100 = the price of a one-year-old unit of that model  ·  dotted line = "
+             "half that price  ·  the eight models with the most listings",
              fontsize=9, color=MUTED, ha="left")
-    fig.tight_layout(rect=[0, 0, 1, 0.90])
+    fig.text(0.005, 0.918,
+             "Read the curve, not the endpoint: at 12 years old a car is a different "
+             "generation, so the right-hand end mixes depreciation with a model change.",
+             fontsize=8.5, color=MUTED, ha="left")
+    fig.tight_layout(rect=[0, 0, 1, 0.89])
     save(fig, "02_retention_curves.png")
 
 
@@ -254,15 +260,16 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
     ax1.set_title(f"A. All listings pooled — +{100*(at/mt-1):.0f}%", loc="left", pad=12)
     ax1.set_ylim(0, at * 1.16)
 
-    # B - like-for-like strip plot, one row per age band
+    # B - like-for-like strip plot, one row per age band. One colour on purpose:
+    # the row already says the age band, so a second colour scale only confuses.
     ypos = {"0–2": 2, "3–5": 1, "6–9": 0}
     rng = np.random.default_rng(7)
-    for band, color in BAND_COLORS.items():
+    for band in ypos:
         part = cells[cells["band"] == band]
         if part.empty:
             continue
         y = ypos[band] + rng.uniform(-0.17, 0.17, len(part))
-        ax2.scatter(part["premium"] * 100, y, s=66, color=color, alpha=0.9,
+        ax2.scatter(part["premium"] * 100, y, s=66, color=COOL, alpha=0.9,
                     edgecolor="white", linewidth=0.8, zorder=3)
 
     median = cells["premium"].median() * 100
@@ -272,10 +279,10 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
              for _ in range(1500)]
     ci_lo, ci_hi = (float(v) for v in np.quantile(boots, [0.025, 0.975]))
     ax2.axvline(0, color=INK, lw=1)
-    ax2.axvline(median, color=INK, lw=1.2, ls="--")
+    ax2.axvline(median, color=ACCENT, lw=2, ls="-")
     ax2.axvspan(ci_lo, ci_hi, color=INK, alpha=0.07, lw=0, zorder=0)
     ax2.text(median + 0.6, 2.66,
-             f"median +{median:.1f}%   (95% CI +{ci_lo:.1f} to +{ci_hi:.1f})",
+             f"typical +{median:.1f}%   (likely between +{ci_lo:.1f}% and +{ci_hi:.1f}%)",
              fontsize=9.5, color=INK, va="center", ha="left")
 
     top_cell = cells.nlargest(1, "premium").iloc[0]
@@ -287,18 +294,20 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
                  arrowprops={"arrowstyle": "-", "color": MUTED, "lw": 0.9})
 
     ax2.set_yticks([0, 1, 2])
-    ax2.set_yticklabels(["age 6–9  (n=1)", "age 3–5  (n=17)", "age 0–2  (n=6)"],
-                        fontsize=9.5)
+    ax2.set_yticklabels(["6–9 years", "3–5 years", "0–2 years"], fontsize=9.5)
+    ax2.set_ylabel("vehicle age")
     ax2.set_ylim(-0.55, 2.85)
-    ax2.set_xlabel("automatic premium over manual, within the same model and year (%)")
-    ax2.set_title("B. Same model, same year", loc="left", pad=12)
+    ax2.set_xlabel("how much more the automatic version asks (%), same model and year")
+    ax2.set_title("B. Comparing the same model and year", loc="left", pad=12)
 
-    fig.suptitle("The automatic premium is mostly a segment illusion",
+    fig.suptitle("Automatic cars only look expensive until you compare like with like",
                  x=0.005, ha="left", fontsize=14, fontweight="bold")
     fig.tight_layout(rect=[0, 0, 1, 0.93])
-    footnote(fig, f"Panel B uses the {len(cells)} model-year cells holding at least "
-                  f"{MIN_TRANS_N} listings in both transmissions. Only one cell lies "
-                  "above age 5, so the age trend is indicative, not established.")
+    footnote(fig, "Left: every listing thrown together, so the figure also reflects "
+                  "which cars tend to be automatic. Right: the same comparison done "
+                  f"between automatic and manual versions of the same model and year "
+                  f"({len(cells)} such pairs). Only one pair is older than five years, "
+                  "so the age pattern is a hint, not a conclusion.")
     save(fig, "03_transmission_premium.png")
 
 
@@ -328,8 +337,8 @@ def chart_mileage(df: pd.DataFrame) -> dict:
     ax1.set_xticklabels(labels, fontsize=8.5)
     ax1.set_ylim(0, raw.max() * 1.16)
     ax1.set_ylabel("median asking price (Rp million)")
-    ax1.set_xlabel(f"odometer reading  ·  n={len(all_km):,} listings")
-    ax1.set_title(f"A. All listings pooled — −{100*(1-raw.iloc[-1]/raw.iloc[0]):.0f}%",
+    ax1.set_xlabel(f"kilometres on the clock  ·  n={len(all_km):,} listings")
+    ax1.set_title(f"A. All listings together — a {100*(1-raw.iloc[-1]/raw.iloc[0]):.0f}% gap",
                   loc="left", pad=12)
 
     # B - proper within-cell contrast: the highest-mileage third against the
@@ -367,21 +376,22 @@ def chart_mileage(df: pd.DataFrame) -> dict:
     ax2.axvline(med, color=ACCENT, lw=2, zorder=4)
     ax2.set_yticks([])
     ax2.set_ylim(-0.62, 0.78)
-    ax2.set_xlabel("inside the same model-year:\nhigh-mileage third vs low-mileage third (%)")
-    ax2.set_title("B. Same model, same year", loc="left", pad=12)
-    ax2.text(med + 1.2, 0.60, f"median {med:+.1f}%", ha="left", va="center",
+    ax2.set_xlabel("price difference between the highest- and lowest-mileage\nthird of the same model and year (%)")
+    ax2.set_title("B. Comparing the same model and year", loc="left", pad=12)
+    ax2.text(med + 1.2, 0.60, f"typical {abs(med):.1f}% cheaper", ha="left", va="center",
              fontsize=11, color=ACCENT, fontweight="bold")
-    ax2.text(0.02, 0.04, f"95% CI {ci_lo:+.1f} to {ci_hi:+.1f}%",
+    ax2.text(0.02, 0.04, f"likely between {abs(ci_hi):.1f}% and {abs(ci_lo):.1f}% cheaper",
              transform=ax2.transAxes, fontsize=8.5, color=MUTED)
 
-    fig.suptitle("The odometer moves the price, but far less than it looks",
+    fig.suptitle("High mileage looks expensive — until you compare the same model",
                  x=0.005, ha="left", fontsize=14, fontweight="bold")
     fig.tight_layout(rect=[0, 0, 1, 0.93])
-    footnote(fig, f"Panel A: all {len(all_km):,} listings that report an odometer. "
-                  f"Panel B: {len(gaps)} model-years with at least 6 listings, comparing "
-                  f"the highest-mileage third against the lowest (median odometer "
-                  f"{gaps['km_low'].median():,.0f} km versus {gaps['km_high'].median():,.0f} km). "
-                  "Bootstrap CI resamples model-years.")
+    footnote(fig, f"Left: every listing that reports a mileage ({len(all_km):,} cars). "
+                  f"Right: {len(gaps)} model-years with at least six cars, comparing the "
+                  f"highest-mileage third with the lowest of the very same model and year "
+                  f"(about {gaps['km_low'].median():,.0f} km versus "
+                  f"{gaps['km_high'].median():,.0f} km). A dot is one model-year; "
+                  "the orange band is where the true figure most likely sits.")
     save(fig, "04_mileage_illusion.png")
     return {"gaps": gaps, "raw": raw}
 

@@ -1063,3 +1063,18 @@ strong {
   .project-grid { grid-template-columns: 1fr; gap: 16px; }
   .project-card { padding: 22px 20px 18px; }
 }
+
+/* --------------------------------------------------------------------------
+   13. Vertical rhythm for full-width figures
+   -------------------------------------------------------------------------- */
+.case > .case-figure {
+  margin-block: 36px;
+}
+
+.case > .case-figure:first-of-type {
+  margin-top: 8px;
+}
+
+.case > .case-figure:last-of-type {
+  margin-bottom: 8px;
+}

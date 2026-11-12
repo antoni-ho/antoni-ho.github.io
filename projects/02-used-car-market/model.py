@@ -354,7 +354,7 @@ def main() -> None:
     gap_span = loc["median"].max() - loc["median"].min()
 
     # ---- chart: location and brand premium ----
-    fig, (axa, axb) = plt.subplots(1, 2, figsize=(13.5, 5.6),
+    fig, (axa, axb) = plt.subplots(1, 2, figsize=(12.5, 5.8),
                                    gridspec_kw={"width_ratios": [1, 1]})
     axa.barh(np.arange(len(loc)), loc["median"], color=COOL, height=0.66)
     axa.set_yticks(np.arange(len(loc)))
@@ -364,10 +364,10 @@ def main() -> None:
     # Fixed, honest scale: the point is that the differences are tiny, so the
     # axis must not zoom into them.
     axa.set_xlim(-2, 2)
-    axa.set_xlabel("asking price versus the same car elsewhere (%), model-controlled")
-    axa.set_title("A. Location, once the car is held constant", loc="left", pad=12)
-    axa.text(0.02, 0.94,
-             f"all four provinces within {abs(gap_span):.1f} pp\n(axis spans ±2%)",
+    axa.set_xlabel("price difference for the same car sold elsewhere (%)")
+    axa.set_title("A. Where the car is sold", loc="left", pad=12)
+    axa.text(0.03, 0.93,
+             f"all four provinces sit within {abs(gap_span):.1f} points\n(axis spans ±2%)",
              transform=axa.transAxes, ha="left", va="top", fontsize=8.5, color=MUTED)
 
     axb.barh(np.arange(len(brand_gap)), brand_gap["median"],
@@ -377,62 +377,84 @@ def main() -> None:
     axb.set_yticklabels(brand_gap.index, fontsize=9)
     axb.invert_yaxis()
     axb.axvline(0, color=INK, lw=1)
-    axb.set_xlabel("premium over what the specifications alone predict (%)")
-    axb.set_title("B. What the badge is worth, net of specifications", loc="left", pad=12)
+    axb.set_xlabel("extra price the badge adds, beyond the specifications (%)")
+    axb.set_title("B. Which badge carries a premium", loc="left", pad=12)
 
-    fig.suptitle("Geography barely matters; the badge matters a lot",
-                 x=0.005, ha="left", fontsize=14, fontweight="bold")
+    fig.suptitle("Where a car is sold hardly matters. Which car it is, matters a lot.",
+                 x=0.005, ha="left", fontsize=13.5, fontweight="bold")
     fig.tight_layout(rect=[0, 0, 1, 0.92])
-    fig.text(0.005, -0.03,
-             "Panel A: median residual of the full model by province, provinces with "
-             "at least 150 listings. Panel B: median residual of the specification-only "
-             "model by brand, brands with at least 100 listings.",
+    fig.text(0.005, -0.02,
+             "Left: cars of the same model and year, compared across provinces "
+             "(provinces with at least 150 listings). Right: how far each brand's "
+             "prices sit above or below what its cars' specifications would suggest "
+             "(brands with at least 100 listings). Orange means the badge adds value; "
+             "blue means the cars sell below their paper specification.",
              fontsize=8.5, color=MUTED, va="top")
     fig.savefig(IMAGES / "07_location_and_brand.png", bbox_inches="tight",
-                facecolor="white")
+                pad_inches=0.16, facecolor="white")
     plt.close(fig)
     out(f"saved {IMAGES / '07_location_and_brand.png'}")
 
     # ---- chart: model-level bargains ----
     pick = pd.concat([model_gap.head(9), model_gap.tail(9)]).sort_values("median")
-    fig, ax = plt.subplots(figsize=(9.5, 6.4))
+    fig, ax = plt.subplots(figsize=(11, 6.2))
     ypos = np.arange(len(pick))
     ax.barh(ypos, pick["median"],
             color=[COOL if v < 0 else ACCENT for v in pick["median"]], height=0.66)
     ax.set_yticks(ypos)
     ax.set_yticklabels([f"{b} {m}" for b, m in pick.index], fontsize=9)
     ax.axvline(0, color=INK, lw=1)
-    ax.set_xlabel("asking price versus what the specifications predict (%)")
-    ax.set_title("Where price and specifications disagree most",
+    ax.set_xlabel("price compared with what the car's specifications suggest (%)")
+    ax.set_title("Which models look cheap — or expensive — for what they offer",
                  loc="left", pad=14)
     fig.text(0.005, -0.02,
-             "Blue: listed below the value of their measured specifications - either "
-             "underrated, or carrying a drawback the specifications miss. Orange: above. "
-             "Model series with at least 25 listings; median per series.",
+             "Blue: the car sells for less than its specifications suggest, either "
+             "because it is underrated or because it carries a drawback the paperwork "
+             "cannot show. Orange: it sells for more. Only models with at least 25 "
+             "listings are shown.",
              fontsize=8.5, color=MUTED, va="top")
     fig.tight_layout()
     fig.savefig(IMAGES / "08_model_bargains.png", bbox_inches="tight",
-                facecolor="white")
+                pad_inches=0.16, facecolor="white")
     plt.close(fig)
     out(f"saved {IMAGES / '08_model_bargains.png'}")
     out()
 
     # ---- artefacts ----
-    fig, ax = plt.subplots(figsize=(9, 6))
+    # Readable names: `model_g` is the model name with rare models grouped.
+    DISPLAY = {
+        "brand": "brand", "model_g": "model", "age": "vehicle age",
+        "engine_cc": "engine size", "mileage_km": "mileage",
+        "body_type": "body type", "km_per_year": "km per year",
+        "seats": "seats", "fuel_type": "fuel type",
+        "transmission": "transmission", "province": "province",
+        "engine_hp": "engine power", "is_luxury": "luxury brand",
+        "has_mileage": "mileage reported", "has_engine": "engine size reported",
+        "flag_pajak_hidup": "text: road tax paid",
+        "flag_tangan_pertama": "text: first owner",
+        "flag_service_record": "text: service history",
+        "flag_nego": "text: negotiable",
+    }
+    fig, ax = plt.subplots(figsize=(9.5, 6.2))
     top = order[:12][::-1]
     ax.barh(np.arange(len(top)), imp.importances_mean[top], color=COOL, height=0.68,
             xerr=imp.importances_std[top], error_kw={"ecolor": "#c3cad1", "lw": 1})
     ax.set_yticks(np.arange(len(top)))
-    ax.set_yticklabels([names[i] for i in top], fontsize=10)
-    ax.set_xlabel("increase in RMSE when the feature is shuffled (log points)")
-    ax.set_title("What actually drives the asking price?", loc="left", pad=14)
+    ax.set_yticklabels([DISPLAY.get(names[i], names[i]) for i in top], fontsize=10)
+    ax.set_xlabel("how much worse the prediction gets when this detail is scrambled\n"
+                  "(higher = the price depends on it more)")
+    ax.set_title("Which details the asking price actually depends on",
+                 loc="left", pad=14)
     fig.text(0.005, -0.02,
-             f"{best_name}, permutation importance on a 20% holdout, 8 repeats.",
-             fontsize=8.5, color=MUTED)
+             "Each bar is what happens to the model's error when that one detail is "
+             "randomly shuffled: a tall bar means the price really depends on it, a "
+             "bar near zero means it barely matters. Gradient boosting, tested on "
+             "listings the model never saw.",
+             fontsize=8.5, color=MUTED, va="top")
     fig.tight_layout()
     IMAGES.mkdir(exist_ok=True)
     fig.savefig(IMAGES / "06_feature_importance.png", bbox_inches="tight",
-                facecolor="white")
+                pad_inches=0.16, facecolor="white")
     plt.close(fig)
     out(f"saved {IMAGES / '06_feature_importance.png'}")
 
