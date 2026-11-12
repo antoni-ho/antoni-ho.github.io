@@ -34,6 +34,7 @@ from __future__ import annotations
 
 import os
 import sys
+import textwrap
 import warnings
 from pathlib import Path
 
@@ -100,6 +101,12 @@ MIN_MODEL_N = 20   # rarer models collapse into "other": HistGradientBoosting
                    # accepts at most 255 categories per feature
 
 _lines: list[str] = []
+
+
+def note(fig, text: str, width: int = 104) -> None:
+    """Wrapped caption inside the figure; long single lines would widen the canvas."""
+    fig.text(0.005, 0.02, textwrap.fill(" ".join(text.split()), width),
+             fontsize=8.5, color=MUTED, va="bottom", ha="left")
 
 
 def out(msg: str = "") -> None:
@@ -381,15 +388,14 @@ def main() -> None:
     axb.set_title("B. Which badge carries a premium", loc="left", pad=12)
 
     fig.suptitle("Where a car is sold hardly matters. Which car it is, matters a lot.",
-                 x=0.005, ha="left", fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.92])
-    fig.text(0.005, -0.02,
-             "Left: cars of the same model and year, compared across provinces "
-             "(provinces with at least 150 listings). Right: how far each brand's "
-             "prices sit above or below what its cars' specifications would suggest "
-             "(brands with at least 100 listings). Orange means the badge adds value; "
-             "blue means the cars sell below their paper specification.",
-             fontsize=8.5, color=MUTED, va="top")
+                 x=0.005, y=0.985, ha="left", va="top",
+                 fontsize=13.5, fontweight="bold")
+    fig.tight_layout(rect=[0, 0.13, 1, 0.90])
+    note(fig, "Left: the same car and year, priced in different provinces (provinces with "
+              "at least 150 listings). Right: how far each brand's prices sit above or "
+              "below what its cars' specifications suggest (brands with at least 100 "
+              "listings). Orange = the badge adds value; blue = the cars sell below their "
+              "paper specification.", width=100)
     fig.savefig(IMAGES / "07_location_and_brand.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")
     plt.close(fig)
@@ -407,13 +413,11 @@ def main() -> None:
     ax.set_xlabel("price compared with what the car's specifications suggest (%)")
     ax.set_title("Which models look cheap — or expensive — for what they offer",
                  loc="left", pad=14)
-    fig.text(0.005, -0.02,
-             "Blue: the car sells for less than its specifications suggest, either "
-             "because it is underrated or because it carries a drawback the paperwork "
-             "cannot show. Orange: it sells for more. Only models with at least 25 "
-             "listings are shown.",
-             fontsize=8.5, color=MUTED, va="top")
-    fig.tight_layout()
+    fig.tight_layout(rect=[0, 0.11, 1, 1])
+    note(fig, "Blue: the car sells for less than its specifications suggest, either "
+              "because it is underrated or because it carries a drawback the paperwork "
+              "cannot show. Orange: it sells for more. Only models with at least 25 "
+              "listings are shown.", width=98)
     fig.savefig(IMAGES / "08_model_bargains.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")
     plt.close(fig)
@@ -441,17 +445,15 @@ def main() -> None:
             xerr=imp.importances_std[top], error_kw={"ecolor": "#c3cad1", "lw": 1})
     ax.set_yticks(np.arange(len(top)))
     ax.set_yticklabels([DISPLAY.get(names[i], names[i]) for i in top], fontsize=10)
-    ax.set_xlabel("how much worse the prediction gets when this detail is scrambled\n"
+    ax.set_xlabel("how much worse the prediction gets without this detail\n"
                   "(higher = the price depends on it more)")
     ax.set_title("Which details the asking price actually depends on",
                  loc="left", pad=14)
-    fig.text(0.005, -0.02,
-             "Each bar is what happens to the model's error when that one detail is "
-             "randomly shuffled: a tall bar means the price really depends on it, a "
-             "bar near zero means it barely matters. Gradient boosting, tested on "
-             "listings the model never saw.",
-             fontsize=8.5, color=MUTED, va="top")
-    fig.tight_layout()
+    fig.tight_layout(rect=[0, 0.12, 1, 1])
+    note(fig, "Each bar is how much worse the prediction gets when that one detail is "
+              "randomly shuffled: a tall bar means the price really depends on it, a bar "
+              "near zero means it barely matters. Gradient boosting, on listings the "
+              "model never saw.", width=98)
     IMAGES.mkdir(exist_ok=True)
     fig.savefig(IMAGES / "06_feature_importance.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")

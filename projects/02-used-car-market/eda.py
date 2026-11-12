@@ -23,6 +23,7 @@ Usage:
 from __future__ import annotations
 
 import sys
+import textwrap
 from pathlib import Path
 
 import matplotlib
@@ -90,7 +91,14 @@ def save(fig, name: str) -> None:
 
 
 def footnote(fig, text: str) -> None:
-    fig.text(0.005, -0.035, text, fontsize=8.5, color=MUTED, va="top")
+    """A short, wrapped caption inside the figure.
+
+    Wrapping matters: a long single line makes bbox_inches="tight" widen the
+    canvas far beyond the axes, which shrinks the chart when it is placed on a
+    page. No line should be longer than the plot is wide.
+    """
+    fig.text(0.005, 0.02, textwrap.fill(" ".join(text.split()), 96),
+             fontsize=8.5, color=MUTED, va="bottom", ha="left")
 
 
 # ---------------------------------------------------------------------------
@@ -157,11 +165,11 @@ def chart_brand_retention(series: pd.DataFrame) -> pd.DataFrame:
     ax.set_xticks([-18, -15, -12, -9, -6, -3, 0])
     ax.set_xlabel("how much of its value the brand loses each year (%)")
     ax.set_title("Which brands hold their value best?", loc="left", pad=16)
+    fig.tight_layout(rect=[0, 0.11, 1, 1])
     footnote(fig, "Each bar is the typical (median) yearly loss across that brand's "
-                  "models. The thin lines show how much the brand's models differ from "
-                  "one another. n = how many models were available for that brand. "
-                  "Median is used instead of average because a few extremely expensive "
-                  "listings would otherwise dominate.")
+                  "models; the thin lines show how much the models differ. Median, not "
+                  "average, so one very expensive listing cannot distort the bar. "
+                  "n = how many models were available.")
     save(fig, "01_brand_retention.png")
     return summary
 
@@ -202,16 +210,16 @@ def chart_retention_curves(df: pd.DataFrame, series: pd.DataFrame) -> None:
     axes[0, 0].set_xticks(range(1, 16, 2))
 
     fig.suptitle("How fast each model loses value",
-                 x=0.005, ha="left", fontsize=13.5, fontweight="bold")
-    fig.text(0.005, 0.945,
-             "100 = the price of a one-year-old unit of that model  ·  dotted line = "
-             "half that price  ·  the eight models with the most listings",
-             fontsize=9, color=MUTED, ha="left")
-    fig.text(0.005, 0.918,
-             "Read the curve, not the endpoint: at 12 years old a car is a different "
-             "generation, so the right-hand end mixes depreciation with a model change.",
-             fontsize=8.5, color=MUTED, ha="left")
-    fig.tight_layout(rect=[0, 0, 1, 0.89])
+                 x=0.005, y=0.985, ha="left", va="top",
+                 fontsize=13.5, fontweight="bold")
+    fig.text(0.005, 0.940,
+             "100 = what a one-year-old unit of that model asks today",
+             fontsize=9.5, color=MUTED, ha="left", va="top")
+    fig.text(0.005, 0.908,
+             "a point at 40 means that age asks 40% of it  ·  dotted line = half"
+             "  ·  the eight most-listed models",
+             fontsize=9, color=MUTED, ha="left", va="top")
+    fig.tight_layout(rect=[0, 0, 1, 0.87])
     save(fig, "02_retention_curves.png")
 
 
@@ -286,13 +294,6 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
              fontsize=9.5, color=INK, va="center", ha="left")
 
     top_cell = cells.nlargest(1, "premium").iloc[0]
-    ax2.annotate(f"{top_cell['brand']} {top_cell['model']}",
-                 xy=(top_cell["premium"] * 100, ypos[top_cell["band"]] + 0.1),
-                 xytext=(top_cell["premium"] * 100 - 1.5,
-                         ypos[top_cell["band"]] + 0.5),
-                 ha="right", fontsize=8.5, color=MUTED,
-                 arrowprops={"arrowstyle": "-", "color": MUTED, "lw": 0.9})
-
     ax2.set_yticks([0, 1, 2])
     ax2.set_yticklabels(["6–9 years", "3–5 years", "0–2 years"], fontsize=9.5)
     ax2.set_ylabel("vehicle age")
@@ -301,13 +302,13 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
     ax2.set_title("B. Comparing the same model and year", loc="left", pad=12)
 
     fig.suptitle("Automatic cars only look expensive until you compare like with like",
-                 x=0.005, ha="left", fontsize=14, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.93])
-    footnote(fig, "Left: every listing thrown together, so the figure also reflects "
-                  "which cars tend to be automatic. Right: the same comparison done "
-                  f"between automatic and manual versions of the same model and year "
-                  f"({len(cells)} such pairs). Only one pair is older than five years, "
-                  "so the age pattern is a hint, not a conclusion.")
+                 x=0.005, y=0.985, ha="left", va="top",
+                 fontsize=14, fontweight="bold")
+    fig.tight_layout(rect=[0, 0.11, 1, 0.90])
+    footnote(fig, "Left: every listing pooled, so the figure also reflects which cars "
+                  "tend to be automatic. Right: automatic versus manual versions of the "
+                  f"same model and year ({len(cells)} such pairs); only one pair is older "
+                  "than five years, so the age pattern is a hint, not a conclusion.")
     save(fig, "03_transmission_premium.png")
 
 
@@ -384,14 +385,14 @@ def chart_mileage(df: pd.DataFrame) -> dict:
              transform=ax2.transAxes, fontsize=8.5, color=MUTED)
 
     fig.suptitle("High mileage looks expensive — until you compare the same model",
-                 x=0.005, ha="left", fontsize=14, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.93])
+                 x=0.005, y=0.985, ha="left", va="top",
+                 fontsize=14, fontweight="bold")
+    fig.tight_layout(rect=[0, 0.11, 1, 0.90])
     footnote(fig, f"Left: every listing that reports a mileage ({len(all_km):,} cars). "
                   f"Right: {len(gaps)} model-years with at least six cars, comparing the "
-                  f"highest-mileage third with the lowest of the very same model and year "
-                  f"(about {gaps['km_low'].median():,.0f} km versus "
-                  f"{gaps['km_high'].median():,.0f} km). A dot is one model-year; "
-                  "the orange band is where the true figure most likely sits.")
+                  "highest-mileage third with the lowest of the very same model and year "
+                  f"(about {gaps['km_low'].median():,.0f} km against "
+                  f"{gaps['km_high'].median():,.0f} km). Each dot is one model-year.")
     save(fig, "04_mileage_illusion.png")
     return {"gaps": gaps, "raw": raw}
 

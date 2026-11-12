@@ -135,7 +135,7 @@ questions are being asked:
 | Baseline: median of the same model-year | is ML worth it at all? | 0.2325 | 0.935 | **5.9%** |
 | Ridge | — | 0.2605 | 0.918 | 11.3% |
 | Random forest | — | 0.1890 | 0.957 | 6.6% |
-| Gradient boosting | deployment case | **0.1515** | **0.972** | **5.6%** |
+| **Gradient boosting** (used in the write-up) | deployment case | **0.1515** | **0.972** | **5.6%** |
 | Gradient boosting, unseen model series | does it generalise? | 0.3827 | 0.824 | 22.0% |
 
 The baseline is strong, and that is a finding, not a nuisance: a median lookup by model and
@@ -205,8 +205,8 @@ Names used in `model.py` and in the model report:
 
 These are interpretations, not measured outcomes.
 
-- **Buyers** — the sticker is the model and the year. Mileage and gearbox are where the
-  negotiation actually lives, because the sticker barely charges for them.
+- **Buyers** — the asking price is the model and the year. Mileage and gearbox are where
+  the negotiation actually lives, because the asking price barely reflects them.
 - **Sellers** — a service history and a low odometer do not show up in the asking price on
   this platform; they may still matter at the table, but not on paper.
 - **Analysts** — most of the apparent signal in this market is composition. Holding model and
@@ -219,13 +219,13 @@ These are interpretations, not measured outcomes.
   2026, and 97.7% of them are dealer listings. OLX and the certified retailers price
   differently, and private sellers are almost unobserved.
 - **Asking prices only.** Negotiated transaction prices are unobservable, and mileage may be
-  discounted far more during negotiation than on the sticker.
+  discounted far more during negotiation than in the asking price.
 - **Nominal, not inflation-adjusted.** With ~4% inflation, real depreciation is roughly double
   the numbers above.
 - **Odometer readings are plausibly rolled back**, which attenuates any real mileage effect.
   Why the effect is small cannot be settled with this data: asking prices may simply be
   anchored on the model and year; a buyer who cannot verify the odometer will not pay much
-  for it; mileage may be discounted at the negotiating table rather than on the sticker;
+  for it; mileage may be discounted at the negotiating table rather than in the asking price;
   condition may offset usage; and annual distances here are modest (6,000–7,000 km).
 - **Coverage.** Only four provinces have ≥150 listings, so the location result describes Java,
   not Indonesia. 918 sellers hold the 10,484 listings (one dealer has 386), so observations

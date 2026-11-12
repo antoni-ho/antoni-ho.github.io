@@ -49,8 +49,8 @@
             <p class="case-why">
               <strong>Why this question?</strong> Conventional wisdom says a car loses value
               on a predictable curve. Indonesian listings suggest something stranger: the
-              asking price is set almost entirely by <em>which car</em> it is and
-              <em>what year</em>, while the things buyers believe they are negotiating
+              asking price is set almost entirely by <em>which brand and model</em> it is
+              and <em>what year</em>, while the things buyers believe they are negotiating
               over &mdash; the transmission, the odometer, the city &mdash; move the number
               by a few percent at most.
             </p>
@@ -71,7 +71,7 @@
                   <rect x="3" y="5" width="18" height="16" rx="2.5"/>
                   <path d="M8 3v4M16 3v4M3 10h18"/>
                 </svg>
-                <span>Listings collected on November 10, 2026.</span>
+                <span>Data collected on November 10, 2026.</span>
               </p>
 
               <a class="case-source"
@@ -94,15 +94,15 @@
             </li>
             <li>
               <span class="case-stat-value">3&times;</span>
-              <span class="case-stat-label">How much faster a BMW loses value than a Suzuki</span>
+              <span class="case-stat-label">BMW loses value three times faster than Suzuki</span>
             </li>
             <li>
-              <span class="case-stat-value">+5.8%</span>
-              <span class="case-stat-label">What an automatic adds, same model and year</span>
+              <span class="case-stat-value">5.8%</span>
+              <span class="case-stat-label">Extra price of an automatic, same model and year</span>
             </li>
             <li>
               <span class="case-stat-value">4.1%</span>
-              <span class="case-stat-label">How much less a high-mileage car asks</span>
+              <span class="case-stat-label">Discount on a high-mileage version of the same car</span>
             </li>
           </ul>
 
@@ -113,15 +113,15 @@
               <p>
                 For every extra year on the road, a Suzuki loses about 4.4% of its value, a
                 Toyota 5.6% and a BMW 13.0%. Everyone knows Japanese cars hold value
-                better; the surprise is how wide the gap is. After ten years a BMW has kept
-                roughly a quarter of what it was worth when nearly new &mdash; a Suzuki
-                about two thirds.
+                better; the surprise is how wide the gap is.
+                <strong>Ten years on, a BMW asks roughly a fifth of what a one-year-old
+                one does &mdash; a Suzuki or a Toyota about half.</strong>
               </p>
             </div>
 
             <div class="finding">
               <span class="finding-tag finding-tag--neu">Transmission</span>
-              <h2 class="finding-title">An automatic is worth about 6% more, not 125%</h2>
+              <h2 class="finding-title">An automatic is worth 5.8% more, not 125%</h2>
               <p>
                 Line up every automatic against every manual and the automatic looks 125%
                 dearer. That number is meaningless: it is really comparing family cars with
@@ -133,7 +133,7 @@
 
             <div class="finding">
               <span class="finding-tag finding-tag--neg">Odometer</span>
-              <h2 class="finding-title">High mileage costs far less than the sticker suggests</h2>
+              <h2 class="finding-title">High mileage costs far less than buyers expect</h2>
               <p>
                 Group every listing by mileage and the highest-mileage group asks 74% less.
                 But those are mostly old, cheap models. Compare two cars of the
@@ -195,10 +195,11 @@
             <figcaption>
               <strong>Left:</strong> every listing that reports a mileage, grouped into
               fifths. The top group asks 74% less than the bottom &mdash; but those are
-              mostly older, cheaper models. <strong>Right:</strong> the fair comparison,
-              where each model-year&rsquo;s highest-mileage third is set against its lowest.
-              Each dot is one model-year; the orange band is where the true figure most
-              likely sits. The honest answer is about <strong>4% cheaper</strong>, not 74%.
+              mostly older, cheaper models. <strong>Right:</strong> the fair comparison.
+              Within each model and year the cars are split into three equal groups by
+              mileage, and the highest group is set against the lowest. Each dot is one
+              model-year; the orange band is where the true figure most likely sits. The
+              honest answer is about <strong>4% cheaper</strong>, not 74%.
             </figcaption>
           </figure>
 
@@ -224,9 +225,9 @@
               <strong>Left:</strong> the same car and year, priced in four provinces &mdash;
               all four sit within 0.7 percentage points, so where you buy barely changes the
               price. <strong>Right:</strong> how much more each brand asks than its
-              cars&rsquo; specifications would suggest. Land Rover and Volkswagen carry the
-              biggest premium; Wuling, MINI and MG sell furthest below their paper
-              specification.
+              cars&rsquo; specifications would suggest, grouped by brand. Orange means the
+              badge adds value; blue means the cars sell below what their specifications
+              imply. The next chart does the same thing model by model.
             </figcaption>
           </figure>
 
@@ -236,9 +237,10 @@
               alt="Diverging bar chart of models priced furthest from what their specifications suggest, from Wuling Cortez minus 31 percent to Land Rover Defender plus 78.7 percent."
               loading="lazy" decoding="async" />
             <figcaption>
-              <strong>Where price and specification disagree most.</strong> Blue models sell
-              for less than their specifications suggest &mdash; either underrated, or
-              hiding a drawback the paperwork cannot show. Orange models sell for more. Only
+              <strong>Where price and specification disagree most.</strong> This is the
+              model-by-model version of the right-hand panel above: blue bars sell for less
+              than their specifications suggest &mdash; either underrated, or hiding a
+              drawback the paperwork cannot show &mdash; and orange bars sell for more. Only
               models with at least 25 listings appear.
             </figcaption>
           </figure>
@@ -260,13 +262,14 @@
             <div class="case-method-body">
               <p class="case-method-label">Methodology validation</p>
               <p>
-                Before trusting the model, it was given a lazy rival: just look up the
-                average price of the same model and year. That rival already lands within
-                <strong>5.9%</strong> of the real asking price, so any model has to beat it
-                to be worth anything. Gradient boosting does better overall
-                (<strong>34.8% less error</strong>) but only slightly better on a typical
-                car (<strong>5.6%</strong>) &mdash; most of its advantage sits in rare and
-                expensive models.
+                The model used on this page is <strong>gradient boosting</strong>, the
+                strongest of four approaches tested. Before trusting it, it was given a lazy
+                rival: just look up the average price of the same model and year. That rival
+                already lands within <strong>5.9%</strong> of the real asking price, so any
+                model has to beat it to be worth anything. Gradient boosting does better
+                overall (<strong>34.8% less error</strong>) but only slightly better on a
+                typical car (<strong>5.6%</strong>) &mdash; most of its advantage sits in
+                rare and expensive models.
               </p>
               <p>
                 Two checks keep the result honest. Take the brand and model away and the
@@ -290,8 +293,8 @@
                 <li>
                   <strong>For buyers</strong> &mdash; the asking price is the model and the
                   year. Mileage and transmission are where negotiation actually lives,
-                  because the sticker barely prices them. A high-mileage car of the right
-                  model and year is where the discount is.
+                  because the asking price barely reflects them. A high-mileage example of
+                  the right model and year is where the discount is.
                 </li>
                 <li>
                   <strong>For sellers</strong> &mdash; a full service history, first-owner
@@ -316,9 +319,10 @@
                 <strong>Mobil123</strong> on 10 November 2026. Every price is an
                 <em>asking</em> price, never a completed sale. 97.7% of the listings come
                 from dealers, so private sellers are almost absent. Brands were sampled with
-                unequal quotas &mdash; that is why the dataset carries a weight column
-                &mdash; and only four provinces list enough cars to compare, so the location
-                finding describes Java, not all of Indonesia.
+                unequal quotas, so each row carries a <em>weight</em> saying how much it
+                should count when a market-wide figure is calculated. Finally, only four
+                provinces list enough cars to compare, so the location finding describes
+                Java, not all of Indonesia.
               </p>
             </section>
           </div>
