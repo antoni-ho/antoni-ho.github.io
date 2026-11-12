@@ -23,7 +23,6 @@ Usage:
 from __future__ import annotations
 
 import sys
-import textwrap
 from pathlib import Path
 
 import matplotlib
@@ -90,17 +89,6 @@ def save(fig, name: str) -> None:
     out(f"   saved {path}")
 
 
-def footnote(fig, text: str) -> None:
-    """A short, wrapped caption inside the figure.
-
-    Wrapping matters: a long single line makes bbox_inches="tight" widen the
-    canvas far beyond the axes, which shrinks the chart when it is placed on a
-    page. No line should be longer than the plot is wide.
-    """
-    fig.text(0.005, 0.02, textwrap.fill(" ".join(text.split()), 96),
-             fontsize=8.5, color=MUTED, va="bottom", ha="left")
-
-
 # ---------------------------------------------------------------------------
 # 1. annual retention by brand
 # ---------------------------------------------------------------------------
@@ -165,11 +153,7 @@ def chart_brand_retention(series: pd.DataFrame) -> pd.DataFrame:
     ax.set_xticks([-18, -15, -12, -9, -6, -3, 0])
     ax.set_xlabel("how much of its value the brand loses each year (%)")
     ax.set_title("Which brands hold their value best?", loc="left", pad=16)
-    fig.tight_layout(rect=[0, 0.11, 1, 1])
-    footnote(fig, "Each bar is the typical (median) yearly loss across that brand's "
-                  "models; the thin lines show how much the models differ. Median, not "
-                  "average, so one very expensive listing cannot distort the bar. "
-                  "n = how many models were available.")
+    fig.tight_layout()
     save(fig, "01_brand_retention.png")
     return summary
 
@@ -205,21 +189,14 @@ def chart_retention_curves(df: pd.DataFrame, series: pd.DataFrame) -> None:
     for ax in axes[-1]:
         ax.set_xlabel("age (years)")
     for ax in axes[:, 0]:
-        ax.set_ylabel("price index")
+        ax.set_ylabel("price index (100 = a one-year-old unit)")
     axes[0, 0].set_ylim(0, 145)
     axes[0, 0].set_xticks(range(1, 16, 2))
 
     fig.suptitle("How fast each model loses value",
                  x=0.005, y=0.985, ha="left", va="top",
                  fontsize=13.5, fontweight="bold")
-    fig.text(0.005, 0.940,
-             "100 = what a one-year-old unit of that model asks today",
-             fontsize=9.5, color=MUTED, ha="left", va="top")
-    fig.text(0.005, 0.908,
-             "a point at 40 means that age asks 40% of it  ·  dotted line = half"
-             "  ·  the eight most-listed models",
-             fontsize=9, color=MUTED, ha="left", va="top")
-    fig.tight_layout(rect=[0, 0, 1, 0.87])
+    fig.tight_layout(rect=[0, 0, 1, 0.93])
     save(fig, "02_retention_curves.png")
 
 
@@ -304,11 +281,7 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
     fig.suptitle("Automatic cars only look expensive until you compare like with like",
                  x=0.005, y=0.985, ha="left", va="top",
                  fontsize=14, fontweight="bold")
-    fig.tight_layout(rect=[0, 0.11, 1, 0.90])
-    footnote(fig, "Left: every listing pooled, so the figure also reflects which cars "
-                  "tend to be automatic. Right: automatic versus manual versions of the "
-                  f"same model and year ({len(cells)} such pairs); only one pair is older "
-                  "than five years, so the age pattern is a hint, not a conclusion.")
+    fig.tight_layout(rect=[0, 0, 1, 0.93])
     save(fig, "03_transmission_premium.png")
 
 
@@ -381,18 +354,11 @@ def chart_mileage(df: pd.DataFrame) -> dict:
     ax2.set_title("B. Comparing the same model and year", loc="left", pad=12)
     ax2.text(med + 1.2, 0.60, f"typical {abs(med):.1f}% cheaper", ha="left", va="center",
              fontsize=11, color=ACCENT, fontweight="bold")
-    ax2.text(0.02, 0.04, f"likely between {abs(ci_hi):.1f}% and {abs(ci_lo):.1f}% cheaper",
-             transform=ax2.transAxes, fontsize=8.5, color=MUTED)
 
     fig.suptitle("High mileage looks expensive — until you compare the same model",
                  x=0.005, y=0.985, ha="left", va="top",
                  fontsize=14, fontweight="bold")
-    fig.tight_layout(rect=[0, 0.11, 1, 0.90])
-    footnote(fig, f"Left: every listing that reports a mileage ({len(all_km):,} cars). "
-                  f"Right: {len(gaps)} model-years with at least six cars, comparing the "
-                  "highest-mileage third with the lowest of the very same model and year "
-                  f"(about {gaps['km_low'].median():,.0f} km against "
-                  f"{gaps['km_high'].median():,.0f} km). Each dot is one model-year.")
+    fig.tight_layout(rect=[0, 0, 1, 0.93])
     save(fig, "04_mileage_illusion.png")
     return {"gaps": gaps, "raw": raw}
 
@@ -414,8 +380,6 @@ def chart_structure(df: pd.DataFrame) -> None:
     axes[0].set_ylabel("listings")
     axes[0].set_xticks(list(range(2008, 2027, 2)))
     axes[0].tick_params(axis="x", labelsize=9)
-    axes[0].text(0.02, 0.93, "orange = 2020, a thin production cohort",
-                 transform=axes[0].transAxes, fontsize=8.5, color=ACCENT)
 
     body = df["body_type"].value_counts().head(6)
     y = np.arange(len(body))

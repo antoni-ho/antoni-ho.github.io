@@ -34,7 +34,6 @@ from __future__ import annotations
 
 import os
 import sys
-import textwrap
 import warnings
 from pathlib import Path
 
@@ -101,12 +100,6 @@ MIN_MODEL_N = 20   # rarer models collapse into "other": HistGradientBoosting
                    # accepts at most 255 categories per feature
 
 _lines: list[str] = []
-
-
-def note(fig, text: str, width: int = 104) -> None:
-    """Wrapped caption inside the figure; long single lines would widen the canvas."""
-    fig.text(0.005, 0.02, textwrap.fill(" ".join(text.split()), width),
-             fontsize=8.5, color=MUTED, va="bottom", ha="left")
 
 
 def out(msg: str = "") -> None:
@@ -373,9 +366,6 @@ def main() -> None:
     axa.set_xlim(-2, 2)
     axa.set_xlabel("price difference for the same car sold elsewhere (%)")
     axa.set_title("A. Where the car is sold", loc="left", pad=12)
-    axa.text(0.03, 0.93,
-             f"all four provinces sit within {abs(gap_span):.1f} points\n(axis spans ±2%)",
-             transform=axa.transAxes, ha="left", va="top", fontsize=8.5, color=MUTED)
 
     axb.barh(np.arange(len(brand_gap)), brand_gap["median"],
              color=[ACCENT if v > 0 else COOL for v in brand_gap["median"]],
@@ -390,12 +380,7 @@ def main() -> None:
     fig.suptitle("Where a car is sold hardly matters. Which car it is, matters a lot.",
                  x=0.005, y=0.985, ha="left", va="top",
                  fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0.13, 1, 0.90])
-    note(fig, "Left: the same car and year, priced in different provinces (provinces with "
-              "at least 150 listings). Right: how far each brand's prices sit above or "
-              "below what its cars' specifications suggest (brands with at least 100 "
-              "listings). Orange = the badge adds value; blue = the cars sell below their "
-              "paper specification.", width=100)
+    fig.tight_layout(rect=[0, 0, 1, 0.93])
     fig.savefig(IMAGES / "07_location_and_brand.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")
     plt.close(fig)
@@ -413,11 +398,7 @@ def main() -> None:
     ax.set_xlabel("price compared with what the car's specifications suggest (%)")
     ax.set_title("Which models look cheap — or expensive — for what they offer",
                  loc="left", pad=14)
-    fig.tight_layout(rect=[0, 0.11, 1, 1])
-    note(fig, "Blue: the car sells for less than its specifications suggest, either "
-              "because it is underrated or because it carries a drawback the paperwork "
-              "cannot show. Orange: it sells for more. Only models with at least 25 "
-              "listings are shown.", width=98)
+    fig.tight_layout()
     fig.savefig(IMAGES / "08_model_bargains.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")
     plt.close(fig)
@@ -449,11 +430,7 @@ def main() -> None:
                   "(higher = the price depends on it more)")
     ax.set_title("Which details the asking price actually depends on",
                  loc="left", pad=14)
-    fig.tight_layout(rect=[0, 0.12, 1, 1])
-    note(fig, "Each bar is how much worse the prediction gets when that one detail is "
-              "randomly shuffled: a tall bar means the price really depends on it, a bar "
-              "near zero means it barely matters. Gradient boosting, on listings the "
-              "model never saw.", width=98)
+    fig.tight_layout()
     IMAGES.mkdir(exist_ok=True)
     fig.savefig(IMAGES / "06_feature_importance.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")

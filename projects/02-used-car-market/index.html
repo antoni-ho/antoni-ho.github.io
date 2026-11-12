@@ -60,7 +60,7 @@
               <li class="chip">pandas</li>
               <li class="chip">scikit-learn</li>
               <li class="chip">matplotlib</li>
-              <li class="chip">Multiple regression</li>
+              <li class="chip">Regression</li>
             </ul>
 
             <div class="case-meta">
@@ -166,10 +166,10 @@
             <figcaption>
               Each panel is one model &mdash; the eight with the most listings. A
               one-year-old unit is set to 100 and every older unit is drawn relative to it,
-              so a point at 40 means that age sells for 40% of the one-year-old price.
-              <strong>Read the slope, not the last point:</strong> at twelve years old the
-              car is a different generation, so the right-hand end of each curve mixes
-              depreciation with a model change.
+              so a point at 40 means that age sells for 40% of the one-year-old price. The
+              dotted line marks half that price. <strong>Read the slope, not the last
+              point:</strong> at twelve years old the car is a different generation, so the
+              right-hand end of each curve mixes depreciation with a model change.
             </figcaption>
           </figure>
 
@@ -183,7 +183,9 @@
               pooled, and an automatic looks 125% dearer &mdash; but that is mostly
               comparing expensive family cars with cheap vans. On the right, the automatic
               and manual versions of the <em>same model and year</em> are compared directly:
-              the typical gap is 5.8%, likely somewhere between 3.1% and 10.6%.
+              the typical gap is 5.8%, likely somewhere between 3.1% and 10.6%. Only one
+              such pair is older than five years, so the age pattern on the right is a hint,
+              not a conclusion.
             </figcaption>
           </figure>
 
@@ -197,9 +199,11 @@
               fifths. The top group asks 74% less than the bottom &mdash; but those are
               mostly older, cheaper models. <strong>Right:</strong> the fair comparison.
               Within each model and year the cars are split into three equal groups by
-              mileage, and the highest group is set against the lowest. Each dot is one
-              model-year; the orange band is where the true figure most likely sits. The
-              honest answer is about <strong>4% cheaper</strong>, not 74%.
+              mileage, and the highest group is set against the lowest. 504 model-years
+              qualified, with a median odometer of 22,500 km against 62,500 km. Each dot is
+              one model-year; the orange band is where the true figure most likely sits,
+              between 3.2% and 4.6% cheaper. The honest answer is about
+              <strong>4% cheaper</strong>, not 74%.
             </figcaption>
           </figure>
 
@@ -210,9 +214,10 @@
               loading="lazy" decoding="async" />
             <figcaption>
               <strong>What the model leans on.</strong> Each bar shows how much worse the
-              prediction gets when that one detail is scrambled, so a tall bar means the
-              asking price really depends on it. Brand and model dominate; transmission,
-              province and every claim written in the listing text are almost flat.
+              prediction gets when that one detail is randomly shuffled. A tall bar means
+              the asking price really depends on it; a bar near zero means it barely matters.
+              Brand and model dominate; transmission, province and every claim written in the
+              listing text are almost flat.
             </figcaption>
           </figure>
 
@@ -222,12 +227,15 @@
               alt="Left: province price gaps all within 0.7 percentage points. Right: the extra price each brand's badge adds beyond its specifications, from Land Rover plus 27.5 percent to Wuling minus 20.6 percent."
               loading="lazy" decoding="async" />
             <figcaption>
-              <strong>Left:</strong> the same car and year, priced in four provinces &mdash;
-              all four sit within 0.7 percentage points, so where you buy barely changes the
-              price. <strong>Right:</strong> how much more each brand asks than its
-              cars&rsquo; specifications would suggest, grouped by brand. Orange means the
-              badge adds value; blue means the cars sell below what their specifications
-              imply. The next chart does the same thing model by model.
+              <strong>Left:</strong> the same car and year, priced in the four provinces
+              with at least 150 listings each &mdash; all four sit within 0.7 percentage
+              points, so where you buy barely changes the price. Note that the left axis
+              spans only ±2%: the bars look short because the differences really are that
+              small. <strong>Right:</strong> how much more each brand asks than its
+              cars&rsquo; specifications would suggest, for brands with at least 100
+              listings. Orange means the badge adds value; blue means the cars sell below
+              what their specifications imply. The next chart does the same thing model by
+              model.
             </figcaption>
           </figure>
 
@@ -252,9 +260,9 @@
               loading="lazy" decoding="async" />
             <figcaption>
               <strong>What the marketplace contains.</strong> SUVs and MPVs account for
-              roughly seven in ten listings and Japanese brands for 57%. The thin 2020 bar is
-              a production effect: few cars were built and sold that year, so few are on sale
-              now.
+              roughly seven in ten listings and Japanese brands for 57%. The orange bar in
+              the left panel is 2020: a production effect, because few cars were built and
+              sold that year, so few are on sale now.
             </figcaption>
           </figure>
 
@@ -262,14 +270,19 @@
             <div class="case-method-body">
               <p class="case-method-label">Methodology validation</p>
               <p>
-                The model used on this page is <strong>gradient boosting</strong>, the
-                strongest of four approaches tested. Before trusting it, it was given a lazy
-                rival: just look up the average price of the same model and year. That rival
-                already lands within <strong>5.9%</strong> of the real asking price, so any
-                model has to beat it to be worth anything. Gradient boosting does better
-                overall (<strong>34.8% less error</strong>) but only slightly better on a
-                typical car (<strong>5.6%</strong>) &mdash; most of its advantage sits in
-                rare and expensive models.
+                The model used on this page is <strong>gradient boosting</strong>. Four
+                approaches were compared: a classic multiple regression (ridge), a random
+                forest, gradient boosting, and a lazy lookup that simply returns the average
+                price of the same model and year. The multiple regression did worse than the
+                lookup, so it is not what drives these numbers.
+              </p>
+              <p>
+                That lookup is a hard act to follow: it already lands within
+                <strong>5.9%</strong> of the real asking price, so any model has to beat it
+                to be worth anything. Gradient boosting does better overall
+                (<strong>34.8% less error</strong>) but only slightly better on a typical car
+                (<strong>5.6%</strong>) &mdash; most of its advantage sits in rare and
+                expensive models.
               </p>
               <p>
                 Two checks keep the result honest. Take the brand and model away and the

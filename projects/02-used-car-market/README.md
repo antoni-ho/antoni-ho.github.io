@@ -133,7 +133,7 @@ questions are being asked:
 | Scheme | Question | RMSE(log) | R² | MdAPE |
 | --- | --- | --- | --- | --- |
 | Baseline: median of the same model-year | is ML worth it at all? | 0.2325 | 0.935 | **5.9%** |
-| Ridge | — | 0.2605 | 0.918 | 11.3% |
+| Ridge (classic multiple regression) | — | 0.2605 | 0.918 | 11.3% |
 | Random forest | — | 0.1890 | 0.957 | 6.6% |
 | **Gradient boosting** (used in the write-up) | deployment case | **0.1515** | **0.972** | **5.6%** |
 | Gradient boosting, unseen model series | does it generalise? | 0.3827 | 0.824 | 22.0% |
