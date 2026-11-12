@@ -128,19 +128,25 @@ def chart_brand_retention(series: pd.DataFrame) -> pd.DataFrame:
     )
     summary = summary[summary["count"] >= 3].sort_values("median", ascending=False)
 
-    fig, ax = plt.subplots(figsize=(9, 6.4))
+    # Plot the yearly loss as a positive number: "4.4% a year" reads better than
+    # "−4.4%", and it removes the question of which way the minus points.
+    loss = (1 - summary["median"]) * 100
+    loss_low = (1 - summary["q3"]) * 100
+    loss_high = (1 - summary["q1"]) * 100
+
+    fig, ax = plt.subplots(figsize=(10, 4.9))
     y = np.arange(len(summary))
     colors = [ACCENT if i < 3 else COOL for i in range(len(summary))]
     ax.barh(
-        y, (summary["median"] - 1) * 100,
-        xerr=[(summary["median"] - summary["q1"]) * 100,
-              (summary["q3"] - summary["median"]) * 100],
-        color=colors, height=0.64,
+        y, loss,
+        xerr=[loss - loss_low, loss_high - loss],
+        color=colors, height=0.62,
         error_kw={"ecolor": "#c3cad1", "lw": 1.1, "capsize": 0},
     )
-    for yi, (_, row) in enumerate(summary.iterrows()):
-        ax.text(0.35, yi, f"−{(1-row['median'])*100:.1f}% / yr", va="center",
-                ha="left", fontsize=10, color=INK, fontweight="bold")
+    for yi, value in enumerate(loss):
+        ax.text(value + 0.35, yi, f"{value:.1f}% a year", va="center",
+                ha="left", fontsize=10, color=INK, fontweight="bold",
+                bbox={"facecolor": "white", "edgecolor": "none", "pad": 1.0})
 
     ax.set_yticks(y)
     ax.set_yticklabels(
@@ -148,11 +154,11 @@ def chart_brand_retention(series: pd.DataFrame) -> pd.DataFrame:
         fontsize=10,
     )
     ax.invert_yaxis()
-    ax.axvline(0, color=INK, lw=1)
-    ax.set_xlim((summary["q1"].min() - 1) * 100 * 1.08, 2.4)
-    ax.set_xticks([-18, -15, -12, -9, -6, -3, 0])
-    ax.set_xlabel("how much of its value the brand loses each year (%)")
-    ax.set_title("Which brands hold their value best?", loc="left", pad=16)
+    ax.set_xlim(0, loss_high.max() + 4)
+    ax.set_xticks(range(0, 19, 3))
+    ax.set_xlabel("value lost per year (%)")
+    ax.set_title("Suzuki holds its value best; BMW loses it fastest",
+                 loc="center", pad=16, fontsize=13.5)
     fig.tight_layout()
     save(fig, "01_brand_retention.png")
     return summary
@@ -193,10 +199,10 @@ def chart_retention_curves(df: pd.DataFrame, series: pd.DataFrame) -> None:
     axes[0, 0].set_ylim(0, 145)
     axes[0, 0].set_xticks(range(1, 16, 2))
 
-    fig.suptitle("How fast each model loses value",
-                 x=0.005, y=0.985, ha="left", va="top",
+    fig.suptitle("Every model loses value at its own pace",
+                 x=0.5, y=0.975, ha="center", va="top",
                  fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.93])
+    fig.tight_layout(rect=[0, 0, 1, 0.92])
     save(fig, "02_retention_curves.png")
 
 
@@ -279,9 +285,9 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
     ax2.set_title("B. Comparing the same model and year", loc="left", pad=12)
 
     fig.suptitle("Automatic cars only look expensive until you compare like with like",
-                 x=0.005, y=0.985, ha="left", va="top",
-                 fontsize=14, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.93])
+                 x=0.5, y=0.975, ha="center", va="top",
+                 fontsize=13.5, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.92])
     save(fig, "03_transmission_premium.png")
 
 
@@ -356,9 +362,9 @@ def chart_mileage(df: pd.DataFrame) -> dict:
              fontsize=11, color=ACCENT, fontweight="bold")
 
     fig.suptitle("High mileage looks expensive — until you compare the same model",
-                 x=0.005, y=0.985, ha="left", va="top",
-                 fontsize=14, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.93])
+                 x=0.5, y=0.975, ha="center", va="top",
+                 fontsize=13.5, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.92])
     save(fig, "04_mileage_illusion.png")
     return {"gaps": gaps, "raw": raw}
 
@@ -399,9 +405,9 @@ def chart_structure(df: pd.DataFrame) -> None:
     axes[2].set_xlabel("% of listings")
     axes[2].set_title("Brand origin", loc="left", pad=10)
 
-    fig.suptitle("What the marketplace actually contains",
-                 x=0.005, ha="left", fontsize=14, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.92])
+    fig.suptitle("The marketplace is mostly SUVs from Japanese brands",
+                 x=0.5, ha="center", fontsize=13.5, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.90])
     save(fig, "05_market_structure.png")
 
 

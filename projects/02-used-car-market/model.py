@@ -378,9 +378,9 @@ def main() -> None:
     axb.set_title("B. Which badge carries a premium", loc="left", pad=12)
 
     fig.suptitle("Where a car is sold hardly matters. Which car it is, matters a lot.",
-                 x=0.005, y=0.985, ha="left", va="top",
+                 x=0.5, y=0.975, ha="center", va="top",
                  fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.93])
+    fig.tight_layout(rect=[0, 0, 1, 0.92])
     fig.savefig(IMAGES / "07_location_and_brand.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")
     plt.close(fig)
@@ -396,8 +396,8 @@ def main() -> None:
     ax.set_yticklabels([f"{b} {m}" for b, m in pick.index], fontsize=9)
     ax.axvline(0, color=INK, lw=1)
     ax.set_xlabel("price compared with what the car's specifications suggest (%)")
-    ax.set_title("Which models look cheap — or expensive — for what they offer",
-                 loc="left", pad=14)
+    ax.set_title("Some models sell far below what their specifications suggest",
+                 loc="center", pad=14, fontsize=13.5)
     fig.tight_layout()
     fig.savefig(IMAGES / "08_model_bargains.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")
@@ -420,7 +420,7 @@ def main() -> None:
         "flag_service_record": "text: service history",
         "flag_nego": "text: negotiable",
     }
-    fig, ax = plt.subplots(figsize=(9.5, 6.2))
+    fig, ax = plt.subplots(figsize=(10, 4.9))
     top = order[:12][::-1]
     ax.barh(np.arange(len(top)), imp.importances_mean[top], color=COOL, height=0.68,
             xerr=imp.importances_std[top], error_kw={"ecolor": "#c3cad1", "lw": 1})
@@ -428,8 +428,8 @@ def main() -> None:
     ax.set_yticklabels([DISPLAY.get(names[i], names[i]) for i in top], fontsize=10)
     ax.set_xlabel("how much worse the prediction gets without this detail\n"
                   "(higher = the price depends on it more)")
-    ax.set_title("Which details the asking price actually depends on",
-                 loc="left", pad=14)
+    ax.set_title("The price depends on the brand, the model and the engine",
+                 loc="center", pad=14, fontsize=13.5)
     fig.tight_layout()
     IMAGES.mkdir(exist_ok=True)
     fig.savefig(IMAGES / "06_feature_importance.png", bbox_inches="tight",
