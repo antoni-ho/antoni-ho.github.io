@@ -154,12 +154,11 @@ def chart_brand_retention(series: pd.DataFrame) -> pd.DataFrame:
         fontsize=10,
     )
     ax.invert_yaxis()
-    ax.set_xlim(0, loss_high.max() + 4)
     ax.set_xticks(range(0, 19, 3))
-    ax.set_xlabel("value lost per year (%)")
-    ax.set_title("Suzuki holds its value best; BMW loses it fastest",
-                 loc="center", pad=16, fontsize=13.5)
-    fig.tight_layout()
+    ax.set_xlim(0, loss_high.max() + 3.5)
+    fig.suptitle("Value lost per year, by brand (%)", x=0.5, y=0.985,
+                 ha="center", va="top", fontsize=13.5, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.93])
     save(fig, "01_brand_retention.png")
     return summary
 
@@ -195,11 +194,11 @@ def chart_retention_curves(df: pd.DataFrame, series: pd.DataFrame) -> None:
     for ax in axes[-1]:
         ax.set_xlabel("age (years)")
     for ax in axes[:, 0]:
-        ax.set_ylabel("price index (100 = a one-year-old unit)")
+        ax.set_ylabel("price index")
     axes[0, 0].set_ylim(0, 145)
     axes[0, 0].set_xticks(range(1, 16, 2))
 
-    fig.suptitle("Every model loses value at its own pace",
+    fig.suptitle("Price index by model and vehicle age",
                  x=0.5, y=0.975, ha="center", va="top",
                  fontsize=13.5, fontweight="bold")
     fig.tight_layout(rect=[0, 0, 1, 0.92])
@@ -237,7 +236,7 @@ def transmission_cells(df: pd.DataFrame) -> pd.DataFrame:
 
 def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
     fig, (ax1, ax2) = plt.subplots(
-        1, 2, figsize=(13, 5.2), gridspec_kw={"width_ratios": [0.7, 1.5]}
+        1, 2, figsize=(13, 4.6), gridspec_kw={"width_ratios": [0.7, 1.5]}
     )
 
     # A - raw comparison
@@ -284,7 +283,7 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
     ax2.set_xlabel("how much more the automatic version asks (%), same model and year")
     ax2.set_title("B. Comparing the same model and year", loc="left", pad=12)
 
-    fig.suptitle("Automatic cars only look expensive until you compare like with like",
+    fig.suptitle("Automatic versus manual: pooled and like-for-like",
                  x=0.5, y=0.975, ha="center", va="top",
                  fontsize=13.5, fontweight="bold")
     fig.tight_layout(rect=[0, 0, 1, 0.92])
@@ -361,7 +360,7 @@ def chart_mileage(df: pd.DataFrame) -> dict:
     ax2.text(med + 1.2, 0.60, f"typical {abs(med):.1f}% cheaper", ha="left", va="center",
              fontsize=11, color=ACCENT, fontweight="bold")
 
-    fig.suptitle("High mileage looks expensive — until you compare the same model",
+    fig.suptitle("Price by mileage: pooled and like-for-like",
                  x=0.5, y=0.975, ha="center", va="top",
                  fontsize=13.5, fontweight="bold")
     fig.tight_layout(rect=[0, 0, 1, 0.92])
@@ -405,7 +404,7 @@ def chart_structure(df: pd.DataFrame) -> None:
     axes[2].set_xlabel("% of listings")
     axes[2].set_title("Brand origin", loc="left", pad=10)
 
-    fig.suptitle("The marketplace is mostly SUVs from Japanese brands",
+    fig.suptitle("Marketplace composition",
                  x=0.5, ha="center", fontsize=13.5, fontweight="bold")
     fig.tight_layout(rect=[0, 0, 1, 0.90])
     save(fig, "05_market_structure.png")

@@ -377,7 +377,7 @@ def main() -> None:
     axb.set_xlabel("extra price the badge adds, beyond the specifications (%)")
     axb.set_title("B. Which badge carries a premium", loc="left", pad=12)
 
-    fig.suptitle("Where a car is sold hardly matters. Which car it is, matters a lot.",
+    fig.suptitle("Price by province, and the brand premium",
                  x=0.5, y=0.975, ha="center", va="top",
                  fontsize=13.5, fontweight="bold")
     fig.tight_layout(rect=[0, 0, 1, 0.92])
@@ -396,9 +396,9 @@ def main() -> None:
     ax.set_yticklabels([f"{b} {m}" for b, m in pick.index], fontsize=9)
     ax.axvline(0, color=INK, lw=1)
     ax.set_xlabel("price compared with what the car's specifications suggest (%)")
-    ax.set_title("Some models sell far below what their specifications suggest",
-                 loc="center", pad=14, fontsize=13.5)
-    fig.tight_layout()
+    fig.suptitle("Price versus specifications, by model", x=0.5, y=0.985,
+                 ha="center", va="top", fontsize=13.5, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.93])
     fig.savefig(IMAGES / "08_model_bargains.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")
     plt.close(fig)
@@ -428,9 +428,9 @@ def main() -> None:
     ax.set_yticklabels([DISPLAY.get(names[i], names[i]) for i in top], fontsize=10)
     ax.set_xlabel("how much worse the prediction gets without this detail\n"
                   "(higher = the price depends on it more)")
-    ax.set_title("The price depends on the brand, the model and the engine",
-                 loc="center", pad=14, fontsize=13.5)
-    fig.tight_layout()
+    fig.suptitle("How much each detail affects the price", x=0.5, y=0.985,
+                 ha="center", va="top", fontsize=13.5, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.93])
     IMAGES.mkdir(exist_ok=True)
     fig.savefig(IMAGES / "06_feature_importance.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")
