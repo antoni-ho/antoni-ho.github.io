@@ -103,7 +103,7 @@ def add_title(fig, text: str, gap: float | None = None) -> None:
         # title than a single bare plot does.
         gap = 0.075 if any(ax.get_title() for ax in fig.axes) else 0.035
     fig.text((left + right) / 2, top + gap, text, ha="center", va="bottom",
-             fontsize=13.5, fontweight="bold")
+             fontsize=15, fontweight="bold")
 
 
 def save(fig, name: str) -> None:
@@ -302,7 +302,7 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
     ax2.set_yticklabels(["6–9 years", "3–5 years", "0–2 years"], fontsize=9.5)
     ax2.set_ylabel("vehicle age")
     ax2.set_ylim(-0.55, 2.85)
-    ax2.set_xlabel("how much more the automatic version asks (%), same model and year")
+    ax2.set_xlabel("automatic price minus manual price (%), same model and year")
     ax2.set_title("B. Comparing the same model and year", loc="left",
                   pad=10, fontsize=11, color=INK, fontweight="normal")
 
@@ -338,7 +338,7 @@ def chart_mileage(df: pd.DataFrame) -> dict:
     ax1.set_ylabel("median asking price (Rp million)")
     ax1.set_xlabel(f"kilometres on the clock  ·  n={len(all_km):,} listings")
     ax1.set_title(f"A. All listings together — a {100*(1-raw.iloc[-1]/raw.iloc[0]):.0f}% gap",
-                  loc="left", pad=12)
+                  loc="left", pad=10, fontsize=11, color=INK, fontweight="normal")
 
     # B - proper within-cell contrast: the highest-mileage third against the
     # lowest-mileage third *of the same model-year*. Splitting the pooled data
@@ -375,7 +375,7 @@ def chart_mileage(df: pd.DataFrame) -> dict:
     ax2.axvline(med, color=ACCENT, lw=2, zorder=4)
     ax2.set_yticks([])
     ax2.set_ylim(-0.62, 0.78)
-    ax2.set_xlabel("price difference between the highest- and lowest-mileage\nthird of the same model and year (%)")
+    ax2.set_xlabel("high-mileage price minus low-mileage price (%)\nfor the same model and year")
     ax2.set_title("B. Comparing the same model and year", loc="left",
                   pad=10, fontsize=11, color=INK, fontweight="normal")
     ax2.text(med + 1.2, 0.60, f"typical {abs(med):.1f}% cheaper", ha="left", va="center",
@@ -399,7 +399,7 @@ def chart_structure(df: pd.DataFrame) -> None:
     colors = [ACCENT if y == 2020 else COOL for y in years.index]
     axes[0].bar(years.index, years.values, color=colors, width=0.78)
     axes[0].set_title("Listings by model year", loc="left", pad=10,
-                      fontsize=11, color=INK)
+                      fontsize=11, color=INK, fontweight="normal")
     axes[0].set_xlabel("vehicle model year")
     axes[0].set_ylabel("listings")
     axes[0].set_xticks(list(range(2008, 2027, 2)))
@@ -413,7 +413,7 @@ def chart_structure(df: pd.DataFrame) -> None:
     axes[1].invert_yaxis()
     axes[1].set_xlabel("% of listings")
     axes[1].set_title("Body type", loc="left", pad=10,
-                      fontsize=11, color=INK)
+                      fontsize=11, color=INK, fontweight="normal")
 
     origin = df["origin"].value_counts()
     axes[2].barh(np.arange(len(origin)), 100 * origin.values / len(df),
@@ -423,7 +423,7 @@ def chart_structure(df: pd.DataFrame) -> None:
     axes[2].invert_yaxis()
     axes[2].set_xlabel("% of listings")
     axes[2].set_title("Brand origin", loc="left", pad=10,
-                      fontsize=11, color=INK)
+                      fontsize=11, color=INK, fontweight="normal")
 
     add_title(fig, "Marketplace composition")
     save(fig, "05_market_structure.png")

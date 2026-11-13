@@ -129,7 +129,7 @@ def add_title(fig, text: str, gap: float | None = None) -> None:
         # title than a single bare plot does.
         gap = 0.075 if any(ax.get_title() for ax in fig.axes) else 0.035
     fig.text((left + right) / 2, top + gap, text, ha="center", va="bottom",
-             fontsize=13.5, fontweight="bold")
+             fontsize=15, fontweight="bold")
 
 
 # ---------------------------------------------------------------------------

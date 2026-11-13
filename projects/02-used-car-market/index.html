@@ -114,8 +114,8 @@
                 For every extra year on the road, a Suzuki loses about 4.4% of its value, a
                 Toyota 5.6% and a BMW 13.0%. Everyone knows Japanese cars hold value
                 better; the surprise is how wide the gap is.
-                <strong>Ten years on, a BMW asks roughly a fifth of what a one-year-old
-                one does &mdash; a Suzuki or a Toyota about half.</strong>
+                Ten years on, a BMW asks roughly <strong>a fifth</strong> of what a
+                one-year-old one does &mdash; a Suzuki or a Toyota about <strong>half</strong>.
               </p>
             </div>
 
@@ -123,9 +123,9 @@
               <span class="finding-tag finding-tag--neu">Transmission</span>
               <h2 class="finding-title">An automatic is worth 5.8% more, not 125%</h2>
               <p>
-                Line up every automatic against every manual and the automatic looks 125%
-                dearer. That number is meaningless: it is really comparing family cars with
-                delivery vans. Compare the automatic and manual versions of the
+                Compare every automatic with every manual and the automatic looks 125% more
+                expensive. That number is meaningless: it is really comparing family cars
+                with delivery vans. Compare the automatic and manual versions of the
                 <strong>same model and year</strong> and the gap falls to about
                 <strong>5.8%</strong>.
               </p>
@@ -154,7 +154,7 @@
               extra year of age. The thin lines show how much the brand&rsquo;s own models
               differ. Only brands with at least three models are shown, and the median is
               used instead of an average so that one extremely expensive listing cannot
-              distort the picture.
+              distort the picture. The three that hold value best are picked out in orange.
             </figcaption>
           </figure>
 
@@ -169,7 +169,7 @@
               so a point at 40 means that age sells for 40% of the one-year-old price. The
               dotted line marks half that price. <strong>Read the slope, not the last
               point:</strong> at twelve years old the car is a different generation, so the
-              right-hand end of each curve mixes depreciation with a model change.
+              right-hand end of each curve mixes depreciation with a model change. A single year sitting higher than its neighbour is a model-year effect, such as a new variant, not an error.
             </figcaption>
           </figure>
 
@@ -180,12 +180,13 @@
               loading="lazy" decoding="async" />
             <figcaption>
               <strong>The same comparison, done twice.</strong> On the left every listing is
-              pooled, and an automatic looks 125% dearer &mdash; but that is mostly
+              pooled, and an automatic looks 125% more expensive &mdash; but that is mostly
               comparing expensive family cars with cheap vans. On the right, the automatic
               and manual versions of the <em>same model and year</em> are compared directly:
               the typical gap is 5.8%, likely somewhere between 3.1% and 10.6%. Only one
               such pair is older than five years, so the age pattern on the right is a hint,
-              not a conclusion.
+              not a conclusion. A dot to the left of zero means the automatic was the
+              cheaper of the two.
             </figcaption>
           </figure>
 
@@ -203,7 +204,8 @@
               qualified, with a median odometer of 22,500 km against 62,500 km. Each dot is
               one model-year; the orange band is where the true figure most likely sits,
               between 3.2% and 4.6% cheaper. The honest answer is about
-              <strong>4% cheaper</strong>, not 74%.
+              <strong>4% cheaper</strong>, not 74%. A dot to the left of zero means the
+              high-mileage car asks less.
             </figcaption>
           </figure>
 
@@ -234,8 +236,7 @@
               small. <strong>Right:</strong> how much more each brand asks than its
               cars&rsquo; specifications would suggest, for brands with at least 100
               listings. Orange means the brand adds value; blue means the cars sell below
-              what their specifications imply. The next chart does the same thing model by
-              model.
+              what their specifications imply.
             </figcaption>
           </figure>
 
@@ -245,11 +246,11 @@
               alt="Diverging bar chart of models priced furthest from what their specifications suggest, from Wuling Cortez minus 31 percent to Land Rover Defender plus 78.7 percent."
               loading="lazy" decoding="async" />
             <figcaption>
-              <strong>Where price and specification disagree most.</strong> This is the
-              model-by-model version of the right-hand panel above: blue bars sell for less
-              than their specifications suggest &mdash; either underrated, or hiding a
-              drawback the paperwork cannot show &mdash; and orange bars sell for more. Only
-              models with at least 25 listings appear.
+              One bar per model: how far its asking price sits from what its specifications
+              suggest. Blue means the car sells for less than those specifications imply
+              &mdash; either underrated, or hiding a drawback the paperwork cannot show
+              &mdash; and orange means it sells for more. Only models with at least 25
+              listings appear.
             </figcaption>
           </figure>
 
@@ -277,9 +278,8 @@
                 lookup, so it is not what drives these numbers.
               </p>
               <p>
-                That lookup is a hard act to follow: it already lands within
-                <strong>5.9%</strong> of the real asking price, so any model has to beat it
-                to be worth anything. Gradient boosting does better overall
+                That lookup is already good: its median error is <strong>5.9%</strong>, so any
+                model has to do better than that to be worth anything. Gradient boosting does better overall
                 (<strong>34.8% less error</strong>) but only slightly better on a typical car
                 (<strong>5.6%</strong>) &mdash; most of its advantage sits in rare and
                 expensive models.
@@ -293,8 +293,8 @@
               </p>
             </div>
             <ul class="case-method-stats">
-              <li><strong>5.9%</strong><span>lookup baseline</span></li>
-              <li><strong>5.6%</strong><span>our model</span></li>
+              <li><strong>5.9%</strong><span>median error, lookup baseline</span></li>
+              <li><strong>5.6%</strong><span>median error, our model</span></li>
               <li><strong>+153%</strong><span>error on an unseen model</span></li>
             </ul>
           </aside>
@@ -331,10 +331,10 @@
                 removing 12.3% duplicate listings from the 12,000 scraped from
                 <strong>Mobil123</strong> on 10 November 2026. Every price is an
                 <em>asking</em> price, never a completed sale. 97.7% of the listings come
-                from dealers, so private sellers are almost absent. Brands were sampled with
-                unequal quotas, so each row carries a <em>weight</em> saying how much it
-                should count when a market-wide figure is calculated. Finally, only four
-                provinces list enough cars to compare, so the location finding describes
+                from dealers, so private sellers are almost absent. The sample gives some
+                brands more listings than others, so every car carries a <em>weight</em> that
+                corrects for it whenever a market-wide figure is calculated. Finally, only
+                four provinces list enough cars to compare, so the location finding describes
                 Java, not all of Indonesia.
               </p>
             </section>
