@@ -107,7 +107,7 @@ def out(msg: str = "") -> None:
     _lines.append(str(msg))
 
 
-def add_title(fig, text: str, gap: float = 0.012) -> None:
+def add_title(fig, text: str, gap: float | None = None) -> None:
     """Centre a title just above the axes.
 
     fig.suptitle() reserves its own band of empty space and tight_layout's
@@ -124,6 +124,10 @@ def add_title(fig, text: str, gap: float = 0.012) -> None:
     left = min(b.x0 for b in boxes)
     right = max(b.x1 for b in boxes)
     top = max(b.y1 for b in boxes)
+    if gap is None:
+        # Panels that carry their own title need more air under the figure
+        # title than a single bare plot does.
+        gap = 0.030 if any(ax.get_title() for ax in fig.axes) else 0.012
     fig.text((left + right) / 2, top + gap, text, ha="center", va="bottom",
              fontsize=13.5, fontweight="bold")
 
@@ -386,7 +390,8 @@ def main() -> None:
     # axis must not zoom into them.
     axa.set_xlim(-2, 2)
     axa.set_xlabel("price difference for the same car sold elsewhere (%)")
-    axa.set_title("A. Where the car is sold", loc="left", pad=12)
+    axa.set_title("A. Where the car is sold", loc="left", pad=10,
+                  fontsize=10.5, color=MUTED, fontweight="normal")
 
     axb.barh(np.arange(len(brand_gap)), brand_gap["median"],
              color=[ACCENT if v > 0 else COOL for v in brand_gap["median"]],
@@ -396,7 +401,8 @@ def main() -> None:
     axb.invert_yaxis()
     axb.axvline(0, color=INK, lw=1)
     axb.set_xlabel("extra price the badge adds, beyond the specifications (%)")
-    axb.set_title("B. Which brand carries a premium", loc="left", pad=12)
+    axb.set_title("B. Which brand carries a premium", loc="left", pad=10,
+                  fontsize=10.5, color=MUTED, fontweight="normal")
 
     add_title(fig, "Price by province and the brand premium")
     fig.savefig(IMAGES / "07_location_and_brand.png", bbox_inches="tight",

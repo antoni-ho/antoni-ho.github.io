@@ -81,7 +81,7 @@ def out(msg: str = "") -> None:
     _lines.append(str(msg))
 
 
-def add_title(fig, text: str, gap: float = 0.012) -> None:
+def add_title(fig, text: str, gap: float | None = None) -> None:
     """Centre a title just above the axes.
 
     fig.suptitle() reserves its own band of empty space and tight_layout's
@@ -98,6 +98,10 @@ def add_title(fig, text: str, gap: float = 0.012) -> None:
     left = min(b.x0 for b in boxes)
     right = max(b.x1 for b in boxes)
     top = max(b.y1 for b in boxes)
+    if gap is None:
+        # Panels that carry their own title need more air under the figure
+        # title than a single bare plot does.
+        gap = 0.030 if any(ax.get_title() for ax in fig.axes) else 0.012
     fig.text((left + right) / 2, top + gap, text, ha="center", va="bottom",
              fontsize=13.5, fontweight="bold")
 
@@ -263,7 +267,8 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
         ax1.text(i, value * 1.02, f"{value:,.0f}", ha="center", va="bottom",
                  fontsize=11, fontweight="bold")
     ax1.set_ylabel("median asking price (Rp million)")
-    ax1.set_title(f"A. All listings pooled — +{100*(at/mt-1):.0f}%", loc="left", pad=12)
+    ax1.set_title(f"A. All listings pooled — +{100*(at/mt-1):.0f}%", loc="left",
+                  pad=10, fontsize=10.5, color=MUTED, fontweight="normal")
     ax1.set_ylim(0, at * 1.16)
 
     # B - like-for-like strip plot, one row per age band. One colour on purpose:
@@ -297,7 +302,8 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
     ax2.set_ylabel("vehicle age")
     ax2.set_ylim(-0.55, 2.85)
     ax2.set_xlabel("how much more the automatic version asks (%), same model and year")
-    ax2.set_title("B. Comparing the same model and year", loc="left", pad=12)
+    ax2.set_title("B. Comparing the same model and year", loc="left",
+                  pad=10, fontsize=10.5, color=MUTED, fontweight="normal")
 
     add_title(fig, "Automatic versus manual")
     save(fig, "03_transmission_premium.png")
@@ -369,7 +375,8 @@ def chart_mileage(df: pd.DataFrame) -> dict:
     ax2.set_yticks([])
     ax2.set_ylim(-0.62, 0.78)
     ax2.set_xlabel("price difference between the highest- and lowest-mileage\nthird of the same model and year (%)")
-    ax2.set_title("B. Comparing the same model and year", loc="left", pad=12)
+    ax2.set_title("B. Comparing the same model and year", loc="left",
+                  pad=10, fontsize=10.5, color=MUTED, fontweight="normal")
     ax2.text(med + 1.2, 0.60, f"typical {abs(med):.1f}% cheaper", ha="left", va="center",
              fontsize=11, color=ACCENT, fontweight="bold")
 
@@ -390,7 +397,8 @@ def chart_structure(df: pd.DataFrame) -> None:
     years = years[years.index >= 2008]
     colors = [ACCENT if y == 2020 else COOL for y in years.index]
     axes[0].bar(years.index, years.values, color=colors, width=0.78)
-    axes[0].set_title("Listings by model year", loc="left", pad=10)
+    axes[0].set_title("Listings by model year", loc="left", pad=10,
+                      fontsize=10.5, color=MUTED)
     axes[0].set_xlabel("vehicle model year")
     axes[0].set_ylabel("listings")
     axes[0].set_xticks(list(range(2008, 2027, 2)))
@@ -403,7 +411,8 @@ def chart_structure(df: pd.DataFrame) -> None:
     axes[1].set_yticklabels(body.index, fontsize=9)
     axes[1].invert_yaxis()
     axes[1].set_xlabel("% of listings")
-    axes[1].set_title("Body type", loc="left", pad=10)
+    axes[1].set_title("Body type", loc="left", pad=10,
+                      fontsize=10.5, color=MUTED)
 
     origin = df["origin"].value_counts()
     axes[2].barh(np.arange(len(origin)), 100 * origin.values / len(df),
@@ -412,7 +421,8 @@ def chart_structure(df: pd.DataFrame) -> None:
     axes[2].set_yticklabels(origin.index, fontsize=9)
     axes[2].invert_yaxis()
     axes[2].set_xlabel("% of listings")
-    axes[2].set_title("Brand origin", loc="left", pad=10)
+    axes[2].set_title("Brand origin", loc="left", pad=10,
+                      fontsize=10.5, color=MUTED)
 
     add_title(fig, "Marketplace composition")
     save(fig, "05_market_structure.png")
