@@ -210,7 +210,8 @@ def chart_retention_curves(df: pd.DataFrame, series: pd.DataFrame) -> None:
         ax.plot(np.asarray(keep), index, marker="o", ms=3.5, lw=1.7, color=COOL)
         ax.fill_between(np.asarray(keep), 0, index, color=COOL, alpha=0.07)
         ax.axhline(50, color=MUTED, lw=1, ls=":")
-        ax.set_title(f"{row['brand']} {row['model']}", loc="left", fontsize=10)
+        ax.set_title(f"{row['brand']} {row['model']}", loc="left", fontsize=10.5,
+                     color=MUTED, fontweight="normal")
         ax.text(0.98, 0.92, f"n={int(row['n'])}", transform=ax.transAxes,
                 ha="right", fontsize=8.5, color=MUTED)
 
