@@ -127,7 +127,7 @@ def add_title(fig, text: str, gap: float | None = None) -> None:
     if gap is None:
         # Panels that carry their own title need more air under the figure
         # title than a single bare plot does.
-        gap = 0.030 if any(ax.get_title() for ax in fig.axes) else 0.012
+        gap = 0.075 if any(ax.get_title() for ax in fig.axes) else 0.035
     fig.text((left + right) / 2, top + gap, text, ha="center", va="bottom",
              fontsize=13.5, fontweight="bold")
 
