@@ -379,7 +379,7 @@ def main() -> None:
     gap_span = loc["median"].max() - loc["median"].min()
 
     # ---- chart: location and brand premium ----
-    fig, (axa, axb) = plt.subplots(1, 2, figsize=(12.5, 5.8),
+    fig, (axa, axb) = plt.subplots(1, 2, figsize=(12.5, 5.0),
                                    gridspec_kw={"width_ratios": [1, 1]})
     axa.barh(np.arange(len(loc)), loc["median"], color=COOL, height=0.66)
     axa.set_yticks(np.arange(len(loc)))
@@ -391,7 +391,7 @@ def main() -> None:
     axa.set_xlim(-2, 2)
     axa.set_xlabel("price difference for the same car sold elsewhere (%)")
     axa.set_title("A. Where the car is sold", loc="left", pad=10,
-                  fontsize=10.5, color=MUTED, fontweight="normal")
+                  fontsize=11, color=INK, fontweight="normal")
 
     axb.barh(np.arange(len(brand_gap)), brand_gap["median"],
              color=[ACCENT if v > 0 else COOL for v in brand_gap["median"]],
@@ -402,7 +402,7 @@ def main() -> None:
     axb.axvline(0, color=INK, lw=1)
     axb.set_xlabel("extra price the badge adds, beyond the specifications (%)")
     axb.set_title("B. Which brand carries a premium", loc="left", pad=10,
-                  fontsize=10.5, color=MUTED, fontweight="normal")
+                  fontsize=11, color=INK, fontweight="normal")
 
     add_title(fig, "Price by province and the brand premium")
     fig.savefig(IMAGES / "07_location_and_brand.png", bbox_inches="tight",
@@ -442,7 +442,7 @@ def main() -> None:
         "flag_service_record": "text: service history",
         "flag_nego": "text: negotiable",
     }
-    fig, ax = plt.subplots(figsize=(10, 4.9))
+    fig, ax = plt.subplots(figsize=(10, 4.2))
     top = order[:12][::-1]
     ax.barh(np.arange(len(top)), imp.importances_mean[top], color=COOL, height=0.68,
             xerr=imp.importances_std[top], error_kw={"ecolor": "#c3cad1", "lw": 1})

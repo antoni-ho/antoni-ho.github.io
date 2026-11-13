@@ -159,7 +159,7 @@ def chart_brand_retention(series: pd.DataFrame) -> pd.DataFrame:
     loss_low = (1 - summary["q3"]) * 100
     loss_high = (1 - summary["q1"]) * 100
 
-    fig, ax = plt.subplots(figsize=(10, 4.9))
+    fig, ax = plt.subplots(figsize=(10, 4.2))
     y = np.arange(len(summary))
     colors = [ACCENT if i < 3 else COOL for i in range(len(summary))]
     ax.barh(
@@ -210,8 +210,8 @@ def chart_retention_curves(df: pd.DataFrame, series: pd.DataFrame) -> None:
         ax.plot(np.asarray(keep), index, marker="o", ms=3.5, lw=1.7, color=COOL)
         ax.fill_between(np.asarray(keep), 0, index, color=COOL, alpha=0.07)
         ax.axhline(50, color=MUTED, lw=1, ls=":")
-        ax.set_title(f"{row['brand']} {row['model']}", loc="left", fontsize=10.5,
-                     color=MUTED, fontweight="normal")
+        ax.set_title(f"{row['brand']} {row['model']}", loc="left", fontsize=11,
+                     color=INK, fontweight="normal")
         ax.text(0.98, 0.92, f"n={int(row['n'])}", transform=ax.transAxes,
                 ha="right", fontsize=8.5, color=MUTED)
 
@@ -269,7 +269,7 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
                  fontsize=11, fontweight="bold")
     ax1.set_ylabel("median asking price (Rp million)")
     ax1.set_title(f"A. All listings pooled — +{100*(at/mt-1):.0f}%", loc="left",
-                  pad=10, fontsize=10.5, color=MUTED, fontweight="normal")
+                  pad=10, fontsize=11, color=INK, fontweight="normal")
     ax1.set_ylim(0, at * 1.16)
 
     # B - like-for-like strip plot, one row per age band. One colour on purpose:
@@ -304,7 +304,7 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
     ax2.set_ylim(-0.55, 2.85)
     ax2.set_xlabel("how much more the automatic version asks (%), same model and year")
     ax2.set_title("B. Comparing the same model and year", loc="left",
-                  pad=10, fontsize=10.5, color=MUTED, fontweight="normal")
+                  pad=10, fontsize=11, color=INK, fontweight="normal")
 
     add_title(fig, "Automatic versus manual")
     save(fig, "03_transmission_premium.png")
@@ -377,7 +377,7 @@ def chart_mileage(df: pd.DataFrame) -> dict:
     ax2.set_ylim(-0.62, 0.78)
     ax2.set_xlabel("price difference between the highest- and lowest-mileage\nthird of the same model and year (%)")
     ax2.set_title("B. Comparing the same model and year", loc="left",
-                  pad=10, fontsize=10.5, color=MUTED, fontweight="normal")
+                  pad=10, fontsize=11, color=INK, fontweight="normal")
     ax2.text(med + 1.2, 0.60, f"typical {abs(med):.1f}% cheaper", ha="left", va="center",
              fontsize=11, color=ACCENT, fontweight="bold")
 
@@ -399,7 +399,7 @@ def chart_structure(df: pd.DataFrame) -> None:
     colors = [ACCENT if y == 2020 else COOL for y in years.index]
     axes[0].bar(years.index, years.values, color=colors, width=0.78)
     axes[0].set_title("Listings by model year", loc="left", pad=10,
-                      fontsize=10.5, color=MUTED)
+                      fontsize=11, color=INK)
     axes[0].set_xlabel("vehicle model year")
     axes[0].set_ylabel("listings")
     axes[0].set_xticks(list(range(2008, 2027, 2)))
@@ -413,7 +413,7 @@ def chart_structure(df: pd.DataFrame) -> None:
     axes[1].invert_yaxis()
     axes[1].set_xlabel("% of listings")
     axes[1].set_title("Body type", loc="left", pad=10,
-                      fontsize=10.5, color=MUTED)
+                      fontsize=11, color=INK)
 
     origin = df["origin"].value_counts()
     axes[2].barh(np.arange(len(origin)), 100 * origin.values / len(df),
@@ -423,7 +423,7 @@ def chart_structure(df: pd.DataFrame) -> None:
     axes[2].invert_yaxis()
     axes[2].set_xlabel("% of listings")
     axes[2].set_title("Brand origin", loc="left", pad=10,
-                      fontsize=10.5, color=MUTED)
+                      fontsize=11, color=INK)
 
     add_title(fig, "Marketplace composition")
     save(fig, "05_market_structure.png")
