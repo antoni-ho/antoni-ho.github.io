@@ -760,23 +760,25 @@ strong {
 .case-method p + p { margin-top: 10px; }
 
 .case-method-stats {
-  display: flex;
-  gap: 28px;
+  display: grid;
+  gap: 14px;
+  align-content: center;
 }
 
 .case-method-stats li {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  font-size: 0.75rem;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 0.9rem;
   color: var(--muted-dim);
 }
 
 .case-method-stats strong {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.2;
   color: var(--text);
+  font-variant-numeric: tabular-nums;
 }
 
 /* --- Per-app word clouds --- */
