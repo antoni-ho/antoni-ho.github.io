@@ -158,7 +158,7 @@ def chart_brand_retention(series: pd.DataFrame) -> pd.DataFrame:
     ax.set_xlim(0, loss_high.max() + 3.5)
     fig.suptitle("Value lost per year, by brand (%)", x=0.5, y=0.985,
                  ha="center", va="top", fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.93])
+    fig.tight_layout(rect=[0, 0, 1, 0.955])
     save(fig, "01_brand_retention.png")
     return summary
 
@@ -199,9 +199,9 @@ def chart_retention_curves(df: pd.DataFrame, series: pd.DataFrame) -> None:
     axes[0, 0].set_xticks(range(1, 16, 2))
 
     fig.suptitle("Price index by model and vehicle age",
-                 x=0.5, y=0.975, ha="center", va="top",
+                 x=0.5, y=0.985, ha="center", va="top",
                  fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.92])
+    fig.tight_layout(rect=[0, 0, 1, 0.95])
     save(fig, "02_retention_curves.png")
 
 
@@ -283,10 +283,10 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
     ax2.set_xlabel("how much more the automatic version asks (%), same model and year")
     ax2.set_title("B. Comparing the same model and year", loc="left", pad=12)
 
-    fig.suptitle("Automatic versus manual: pooled and like-for-like",
-                 x=0.5, y=0.975, ha="center", va="top",
+    fig.suptitle("Automatic versus manual: all listings and matched pairs",
+                 x=0.5, y=0.985, ha="center", va="top",
                  fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.92])
+    fig.tight_layout(rect=[0, 0, 1, 0.945])
     save(fig, "03_transmission_premium.png")
 
 
@@ -360,10 +360,10 @@ def chart_mileage(df: pd.DataFrame) -> dict:
     ax2.text(med + 1.2, 0.60, f"typical {abs(med):.1f}% cheaper", ha="left", va="center",
              fontsize=11, color=ACCENT, fontweight="bold")
 
-    fig.suptitle("Price by mileage: pooled and like-for-like",
-                 x=0.5, y=0.975, ha="center", va="top",
+    fig.suptitle("Price by mileage: all listings and matched pairs",
+                 x=0.5, y=0.985, ha="center", va="top",
                  fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.92])
+    fig.tight_layout(rect=[0, 0, 1, 0.945])
     save(fig, "04_mileage_illusion.png")
     return {"gaps": gaps, "raw": raw}
 
@@ -405,8 +405,9 @@ def chart_structure(df: pd.DataFrame) -> None:
     axes[2].set_title("Brand origin", loc="left", pad=10)
 
     fig.suptitle("Marketplace composition",
-                 x=0.5, ha="center", fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.90])
+                 x=0.5, y=0.985, ha="center", va="top",
+                 fontsize=13.5, fontweight="bold")
+    fig.tight_layout(rect=[0, 0, 1, 0.93])
     save(fig, "05_market_structure.png")
 
 

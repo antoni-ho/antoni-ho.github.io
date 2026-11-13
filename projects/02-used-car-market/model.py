@@ -375,12 +375,12 @@ def main() -> None:
     axb.invert_yaxis()
     axb.axvline(0, color=INK, lw=1)
     axb.set_xlabel("extra price the badge adds, beyond the specifications (%)")
-    axb.set_title("B. Which badge carries a premium", loc="left", pad=12)
+    axb.set_title("B. Which brand carries a premium", loc="left", pad=12)
 
     fig.suptitle("Price by province, and the brand premium",
-                 x=0.5, y=0.975, ha="center", va="top",
+                 x=0.5, y=0.985, ha="center", va="top",
                  fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.92])
+    fig.tight_layout(rect=[0, 0, 1, 0.95])
     fig.savefig(IMAGES / "07_location_and_brand.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")
     plt.close(fig)
@@ -388,17 +388,17 @@ def main() -> None:
 
     # ---- chart: model-level bargains ----
     pick = pd.concat([model_gap.head(9), model_gap.tail(9)]).sort_values("median")
-    fig, ax = plt.subplots(figsize=(11, 6.2))
+    fig, ax = plt.subplots(figsize=(12, 5.4))
     ypos = np.arange(len(pick))
     ax.barh(ypos, pick["median"],
             color=[COOL if v < 0 else ACCENT for v in pick["median"]], height=0.66)
     ax.set_yticks(ypos)
-    ax.set_yticklabels([f"{b} {m}" for b, m in pick.index], fontsize=9)
+    ax.set_yticklabels([f"{b} {m}" for b, m in pick.index], fontsize=8.5)
     ax.axvline(0, color=INK, lw=1)
     ax.set_xlabel("price compared with what the car's specifications suggest (%)")
     fig.suptitle("Price versus specifications, by model", x=0.5, y=0.985,
                  ha="center", va="top", fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.93])
+    fig.tight_layout(rect=[0, 0, 1, 0.955])
     fig.savefig(IMAGES / "08_model_bargains.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")
     plt.close(fig)
@@ -426,11 +426,10 @@ def main() -> None:
             xerr=imp.importances_std[top], error_kw={"ecolor": "#c3cad1", "lw": 1})
     ax.set_yticks(np.arange(len(top)))
     ax.set_yticklabels([DISPLAY.get(names[i], names[i]) for i in top], fontsize=10)
-    ax.set_xlabel("how much worse the prediction gets without this detail\n"
-                  "(higher = the price depends on it more)")
-    fig.suptitle("How much each detail affects the price", x=0.5, y=0.985,
+    ax.set_xlabel("higher value = the price depends on it more")
+    fig.suptitle("Effect of each detail on the price", x=0.5, y=0.985,
                  ha="center", va="top", fontsize=13.5, fontweight="bold")
-    fig.tight_layout(rect=[0, 0, 1, 0.93])
+    fig.tight_layout(rect=[0, 0, 1, 0.955])
     IMAGES.mkdir(exist_ok=True)
     fig.savefig(IMAGES / "06_feature_importance.png", bbox_inches="tight",
                 pad_inches=0.16, facecolor="white")
