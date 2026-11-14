@@ -337,7 +337,7 @@ def chart_mileage(df: pd.DataFrame) -> dict:
     ax1.set_ylim(0, raw.max() * 1.16)
     ax1.set_ylabel("median asking price (Rp million)")
     ax1.set_xlabel(f"kilometres on the clock  ·  n={len(all_km):,} listings")
-    ax1.set_title(f"A. All listings together — a {100*(1-raw.iloc[-1]/raw.iloc[0]):.0f}% gap",
+    ax1.set_title("A. All listings pooled",
                   loc="left", pad=10, fontsize=11, color=INK, fontweight="normal")
 
     # B - proper within-cell contrast: the highest-mileage third against the
