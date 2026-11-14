@@ -400,7 +400,7 @@ def main() -> None:
     axb.set_yticklabels(brand_gap.index, fontsize=9)
     axb.invert_yaxis()
     axb.axvline(0, color=INK, lw=1)
-    axb.set_xlabel("extra price the badge adds, beyond the specifications (%)")
+    axb.set_xlabel("asking price above or below what the specifications suggest (%)")
     axb.set_title("B. Which brand carries a premium", loc="left", pad=10,
                   fontsize=11, color=INK, fontweight="normal")
 

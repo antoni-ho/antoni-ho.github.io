@@ -179,13 +179,11 @@
               alt="Left: pooled automatic and manual median prices, the automatic asking 125 percent more. Right: distribution of within model-year automatic premiums, typical plus 5.8 percent, shown by age band."
               loading="lazy" decoding="async" />
             <figcaption>
-              <strong>The same comparison, done twice.</strong> On the left every listing is
+              <strong>Left:</strong> every listing is
               pooled, and an automatic looks 125% more expensive &mdash; but that is mostly
               comparing expensive family cars with cheap vans. On the right, the automatic
               and manual versions of the <em>same model and year</em> are compared directly:
-              the typical gap is 5.8%, likely somewhere between 3.1% and 10.6%. Only one
-              such pair is older than five years, so the age pattern on the right is a hint,
-              not a conclusion.
+              the typical gap is 5.8%, likely somewhere between 3.1% and 10.6%.
             </figcaption>
           </figure>
 
@@ -199,11 +197,12 @@
               fifths. The top group asks 74% less than the bottom &mdash; but those are
               mostly older, cheaper models. <strong>Right:</strong> the fair comparison.
               Within each model and year the cars are split into three equal groups by
-              mileage, and the highest group is set against the lowest. 504 model-years
+              mileage — three rather than five, so each group still holds enough cars
+              — and the highest group is set against the lowest. 504 model-years
               qualified, with a median odometer of 22,500 km against 62,500 km. Each dot is
               one model-year; the orange band is where the true figure most likely sits,
               between 3.2% and 4.6% cheaper. The honest answer is about
-              <strong>4% cheaper</strong>, not 74%.
+              <strong>4.1% cheaper</strong>, not 74%.
             </figcaption>
           </figure>
 
@@ -213,7 +212,7 @@
               alt="Permutation importance of model features, dominated by brand, model, age and engine size, with transmission, province and seller claims near zero."
               loading="lazy" decoding="async" />
             <figcaption>
-              <strong>What the model leans on.</strong> Each bar shows how much worse the
+              Each bar shows how much worse the
               prediction gets when that one detail is randomly shuffled. A tall bar means
               the asking price really depends on it; a bar near zero means it barely matters.
               Brand and model dominate; transmission, province and every claim written in the
@@ -229,9 +228,7 @@
             <figcaption>
               <strong>Left:</strong> the same car and year, priced in the four provinces
               with at least 150 listings each &mdash; all four sit within 0.7 percentage
-              points, so where you buy barely changes the price. Note that the left axis
-              spans only ±2%: the bars look short because the differences really are that
-              small. <strong>Right:</strong> how much more each brand asks than its
+              points, so where you buy barely changes the price. <strong>Right:</strong> how much more each brand asks than its
               cars&rsquo; specifications would suggest, for brands with at least 100
               listings. Orange means the brand adds value; blue means the cars sell below
               what their specifications imply.
@@ -302,10 +299,10 @@
               <p class="case-method-label" id="implications-title">What this means</p>
               <ul class="case-impacts">
                 <li>
-                  <strong>For buyers</strong> &mdash; the asking price is the model and the
-                  year. Mileage and transmission are where negotiation actually lives,
-                  because the asking price barely reflects them. A high-mileage example of
-                  the right model and year is where the discount is.
+                  <strong>For buyers</strong> &mdash; the asking price is mostly the brand, the
+                  model and the year. Mileage and transmission barely move it, which is
+                  where the room to negotiate sits. A high-mileage example of the right
+                  model and year is where the discount is.
                 </li>
                 <li>
                   <strong>For sellers</strong> &mdash; a full service history, first-owner

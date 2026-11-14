@@ -268,7 +268,7 @@ def chart_transmission(df: pd.DataFrame, cells: pd.DataFrame) -> None:
         ax1.text(i, value * 1.02, f"{value:,.0f}", ha="center", va="bottom",
                  fontsize=11, fontweight="bold")
     ax1.set_ylabel("median asking price (Rp million)")
-    ax1.set_title(f"A. All listings pooled — +{100*(at/mt-1):.0f}%", loc="left",
+    ax1.set_title("A. All listings pooled", loc="left",
                   pad=10, fontsize=11, color=INK, fontweight="normal")
     ax1.set_ylim(0, at * 1.16)
 
