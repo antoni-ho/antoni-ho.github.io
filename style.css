@@ -1020,6 +1020,8 @@ strong {
 .project-card-summary {
   color: var(--muted);
   font-size: 0.95rem;
+  /* Keep the stat blocks on the same line across cards of different text length. */
+  flex: 1;
 }
 
 .project-card-stats {
