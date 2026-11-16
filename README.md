@@ -9,7 +9,7 @@ folder and is self-contained — code, data, figures, README and a written case 
 | # | Project | Question it answers | Stack |
 | --- | --- | --- | --- |
 | 01 | [AI app review sentiment](projects/01-ai-app-reviews/) | What are ChatGPT, Gemini and Claude users actually complaining about? | Python · pandas · VADER · matplotlib |
-| 02 | [Used-car value retention](projects/02-used-car-market/) | Which used cars hold their value, and what does the market really charge for? | Python · pandas · scikit-learn · matplotlib |
+| 02 | [The Indonesian used-car market](projects/02-used-car-market/) | What actually sets an asking price: brand, model and year dominate, while mileage and transmission barely move it | Python · pandas · scikit-learn · matplotlib |
 
 ## Structure
 

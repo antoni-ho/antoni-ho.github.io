@@ -1,4 +1,4 @@
-# Indonesian used-car prices — what the market actually charges for
+# The Indonesian used-car market: what actually sets asking prices
 
 An end-to-end data project: enumerate 59,037 live listings on Mobil123, scrape 12,000,
 clean them into 10,484 unique cars, and model the asking price so that model and year are
