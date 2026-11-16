@@ -170,7 +170,7 @@ single model-year cell.
   Honda 6.9, Mazda 8.2, Mercedes-Benz 12.1, Hyundai 12.5, BMW 13.0.
 - **Depreciation is not linear.** An Alphard loses about half its value in four years and then
   flattens; an Avanza declines gently and stays there.
-- **The odometer is weakly priced**, but it is not ignored: the honest statement is "4% for a
+- **The odometer is weakly priced**, but it is not ignored: the honest statement is "4.1% for a
   three-fold mileage difference in asking prices", not "buyers ignore mileage".
 - **Location is not a pricing dimension** on this platform, at least across Java.
 - **Chinese brands are specification-rich and price-poor**: Wuling Cortez −31%, BYD Atto 1
